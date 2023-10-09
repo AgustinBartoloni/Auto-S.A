@@ -1,9 +1,9 @@
 package com.ProgramacionAvanzada.AutoSA.dto;
 
-import java.util.List;
+import java.time.LocalDate;
+//import java.util.List;
 
-import com.ProgramacionAvanzada.AutoSA.entity.Persona;
-import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
+//import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,11 +14,31 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ClienteDto extends Persona {
+public class ClienteDto{
+    //Cuando saque esto me funciono el create
+   //private List<Vehiculo> vehiculo;
     
-    private List<Vehiculo> vehiculo;
-
-    public ClienteDto(@NotBlank String nombre,@NotBlank String apellido,@NotNull int dni,@NotNull long telefono,@NotBlank String email) {
-        super(nombre, apellido, dni, telefono, email);
+    @NotBlank
+    private String nombre;
+    @NotBlank
+    private String apellido;
+    @NotNull
+    private String dni;
+    @NotNull
+    private String telefono;
+    @NotBlank
+    private String email;
+    @NotBlank
+    private String domicilio;
+    @NotNull
+    private LocalDate fechaRevision;
+    public ClienteDto(String nombre, String apellido, String dni, String telefono, String email, String domicilio, LocalDate fechaRevision) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.email = email;
+        this.domicilio = domicilio;
+        this.fechaRevision = fechaRevision;
     }
 }

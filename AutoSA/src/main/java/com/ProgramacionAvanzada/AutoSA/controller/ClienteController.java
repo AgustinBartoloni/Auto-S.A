@@ -43,11 +43,13 @@ public class ClienteController {
             clienteDto.getApellido(),
             clienteDto.getDni(),
             clienteDto.getTelefono(),
-            clienteDto.getEmail()
-        );
+            clienteDto.getEmail(),
+            clienteDto.getDomicilio(),
+            clienteDto.getFechaRevision()
+            );
 
-        clienteService.save(clienteNuevo);
-        return new ResponseEntity<>(HttpStatus.OK);
+            clienteService.save(clienteNuevo);
+            return new ResponseEntity<>(HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -68,6 +70,8 @@ public class ClienteController {
         cliente.setDni(clienteDto.getDni());
         cliente.setTelefono(clienteDto.getTelefono());
         cliente.setEmail(clienteDto.getEmail());
+        cliente.setDomicilio(clienteDto.getDomicilio());;
+        cliente.setFechaRevision(clienteDto.getFechaRevision());
 
         clienteService.save(cliente);
 
@@ -87,7 +91,7 @@ public class ClienteController {
     }
 
     @GetMapping("/by/{dni}")
-    public ResponseEntity<Cliente> findByDni(@PathVariable("dni")int dni){
+    public ResponseEntity<Cliente> findByDni(@PathVariable("dni")String dni){
 
         try {
             Cliente cliente = clienteService.findByDni(dni).get();

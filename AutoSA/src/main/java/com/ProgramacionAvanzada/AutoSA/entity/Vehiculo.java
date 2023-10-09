@@ -1,11 +1,16 @@
 package com.ProgramacionAvanzada.AutoSA.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,6 +35,11 @@ public class Vehiculo {
     @ManyToOne
     @JoinColumn(name = "modelo_id")
     private Modelo modelo;
+    //Un vehiculo puede estar vinculado a muchas ordenes de trabajos
+    //@JsonBackReferences se evita que se cree un ciclo infinito entre los vehiculos y la ordenes de trabajos
+    @OneToMany(mappedBy = "vehiculo")
+    @JsonBackReference
+    private List<OrdenDeTrabajo> ordenDeTrabajo;  
     //Define las otras variables
     private int año;
     private int kilometraje;

@@ -46,7 +46,8 @@ public class TecnicoController {
             tecnicoDto.getApellido(),
             tecnicoDto.getDni(),
             tecnicoDto.getTelefono(),
-            tecnicoDto.getEmail()
+            tecnicoDto.getEmail(),
+            tecnicoDto.getDomicilio()
         );
 
         tecnicoService.save(tecnicoNuevo);
@@ -68,6 +69,7 @@ public class TecnicoController {
         tecnico.setDni(tecnicoDto.getDni());
         tecnico.setTelefono(tecnicoDto.getTelefono());
         tecnico.setEmail(tecnicoDto.getEmail());
+        tecnico.setDomicilio(tecnicoDto.getDomicilio());;
 
         tecnicoService.save(tecnico);
 

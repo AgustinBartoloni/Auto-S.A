@@ -30,7 +30,6 @@ public class VehiculoDto {
     @NotNull
     private Cliente cliente;
 
-
     public VehiculoDto(@NotBlank String patente, @NotNull Modelo modelo, @NotNull Cliente cliente,@NotNull int año, @NotNull int kilometraje) {
         this.patente = patente;
         this.modelo = modelo;

@@ -9,5 +9,5 @@ import com.ProgramacionAvanzada.AutoSA.entity.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
-    Optional<Cliente> findByDni(int dni);
+    Optional<Cliente> findByDni(String dni);
 }

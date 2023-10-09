@@ -24,7 +24,7 @@ public class ClienteService {
         return clienteRepository.findById(id);
     }
 
-    public Optional<Cliente> findByDni(int dni){
+    public Optional<Cliente> findByDni(String dni){
         return clienteRepository.findByDni(dni);
     }
 
