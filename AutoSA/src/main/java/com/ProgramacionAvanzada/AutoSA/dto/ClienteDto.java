@@ -2,6 +2,13 @@ package com.ProgramacionAvanzada.AutoSA.dto;
 
 import java.time.LocalDate;
 //import java.util.List;
+import java.util.List;
+
+import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 
 //import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
 
@@ -15,9 +22,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ClienteDto{
-    //Cuando saque esto me funciono el create
-   //private List<Vehiculo> vehiculo;
     
+    //private List<Vehiculo> vehiculo;
+
     @NotBlank
     private String nombre;
     @NotBlank

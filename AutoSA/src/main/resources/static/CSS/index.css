@@ -29,6 +29,7 @@
 .nav-item a{
     color: var(--colorTres);
     font-size: 20px;
+    border-radius: 15px;
 }
 
 .nav-item a:hover{

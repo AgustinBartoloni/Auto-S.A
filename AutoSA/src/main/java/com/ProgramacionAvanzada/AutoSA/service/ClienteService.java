@@ -1,5 +1,6 @@
 package com.ProgramacionAvanzada.AutoSA.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ProgramacionAvanzada.AutoSA.entity.Cliente;
+import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
 import com.ProgramacionAvanzada.AutoSA.repository.ClienteRepository;
 
 @Service
@@ -20,16 +22,22 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    public void save(Cliente cliente){
+        clienteRepository.save(cliente);
+    }
+
+     public List<Vehiculo> findVehiculosByCliente(int clienteId) {
+        Optional<Cliente> cliente = clienteRepository.findById(clienteId);
+        return cliente.map(Cliente::getVehiculo).orElse(Collections.emptyList());
+    }
+
+
     public Optional<Cliente> findById(int id){
         return clienteRepository.findById(id);
     }
 
     public Optional<Cliente> findByDni(String dni){
         return clienteRepository.findByDni(dni);
-    }
-
-    public void save(Cliente cliente){
-        clienteRepository.save(cliente);
     }
 
     public void deleteById(int id){

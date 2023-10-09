@@ -2,6 +2,7 @@ package com.ProgramacionAvanzada.AutoSA.controller;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ProgramacionAvanzada.AutoSA.dto.ClienteDto;
 import com.ProgramacionAvanzada.AutoSA.entity.Cliente;
+import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
 import com.ProgramacionAvanzada.AutoSA.service.ClienteService;
 
 @RestController
@@ -27,13 +29,21 @@ public class ClienteController {
     ClienteService clienteService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<Cliente>> findAll(){
+    public ResponseEntity<List<Cliente>> findAll() {
+        //List<Cliente> list = clienteService.findAll();
+        //return new ResponseEntity<>(list, HttpStatus.OK);
+        try {
+        List<Cliente> clientes = clienteService.findAll();
 
-        List<Cliente> list = clienteService.findAll();
+        // Inicializa la colección de vehículos de cada cliente antes de devolver la respuesta
+        clientes.forEach(cliente -> Hibernate.initialize(cliente.getVehiculo()));
 
-        return new ResponseEntity<>(list, HttpStatus.OK);
+        return new ResponseEntity<>(clientes, HttpStatus.OK);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
+    }
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ClienteDto clienteDto){
         
@@ -54,6 +64,12 @@ public class ClienteController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }   
+    }
+
+   @GetMapping("/{clienteId}/vehiculo")
+    public ResponseEntity<List<Vehiculo>> listarVehiculosDeCliente(@PathVariable int clienteId) {
+        List<Vehiculo> vehiculos = clienteService.findVehiculosByCliente(clienteId);
+        return new ResponseEntity<>(vehiculos, HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
