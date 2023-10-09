@@ -28,7 +28,7 @@ public class Cliente{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "cliente", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<Vehiculo> vehiculo;
 

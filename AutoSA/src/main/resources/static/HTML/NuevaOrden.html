@@ -40,7 +40,7 @@
                       ABM
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./Servicio.html">Serivicios</a></li>
+                      <li><a class="dropdown-item" href="./Servicio.html">Servicios</a></li>
                       <li><a class="dropdown-item" href="./Vehiculo.html">Vehiculos</a></li>
                       <li><a class="dropdown-item" href="./Marca.html">Marcas</a></li>
                       <li><a class="dropdown-item" href="./Modelo.html">Modelos</a></li>
@@ -132,6 +132,12 @@
                                                 <label for="emailCliente" class="form-label">Email</label>
                                                 <input type="email" class="form-control" id="emailCliente" placeholder="email">
                                             </div>
+
+                                            <div class="mb-3">
+                                                <label for="emailCliente" class="form-label">Adjuntar imagen de Carnet</label>
+                                                <input type="file" class="form-control" id="emailCliente" placeholder="imagen">
+                                            </div>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -144,16 +150,21 @@
                             </div>
                         </div>
 
-                        <!-- Vehiculo -->
-                        <div class="card mb-3">
+                         <!-- Vehiculo -->
+                         <div class="card mb-3">
                             <div class="card-body">
                                 <div class="mb-3">
                                     <h5>Vehículo</h5>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="patenteVehiculo" class="form-label">Patente</label>
-                                    <input type="text" class="form-control" id="patenteVehiculo" placeholder="patente">
+                                    <label for="dominioVehiculo" class="form-label">Patente</label>
+                                    <input type="text" class="form-control" id="dominioVehiculo" placeholder="patente">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="dominioVehiculo" class="form-label">Kilometraje</label>
+                                    <input type="number" class="form-control" id="dominioVehiculo" placeholder="kilometraje">
                                 </div>
 
                                 <!-- Marca -->
@@ -168,9 +179,36 @@
                                                     <select class="form-select" id="marcaVehiculo" aria-label="Default select example" onchange="getModelo()">
                                                         <option selected>Seleccione una marca</option>
                                                     </select>
-                                                </div>                 
-                                            </div>                                            
+                                                </div>
+                                                <div class="col-2">
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMarca">+</button>
+                                                </div>
+                                            </div> 
                                         </div>
+
+
+                                        <!-- Modal Marca -->
+                                        <div class="modal fade" id="modalMarca" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crear nueva Marca</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="nombreMarca" class="form-label">Nombre</label>
+                                                        <input type="text" class="form-control" id="nombreMarca" placeholder="nombre">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearMarca()">Confirmar</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -183,126 +221,46 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">                                            
-                                                <select class="form-select" id="modeloVehiculo" aria-label="Default select example" aria-readonly="true">
+                                                <select class="form-select" id="modeloVehiculo" aria-label="Default select example" disabled>
+                                                    <option selected>Seleccione un modelo</option>
                                                 </select>
+                                            </div>
+
+                                            <div class="col-2">
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modaleModelo">+</button>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <!-- Modal Modelo -->
+                                        <div class="modal fade" id="modaleModelo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="modelModeloLabel">Crear nuevo Modelo</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="nombreModelo" class="form-label">Nombre</label>
+                                                        <input type="text" class="form-control" id="nombreModelo" placeholder="nombre">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearModelo()">Confirmar</button>
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col">
-                                    <h5>Cargar Nuevo Vehiculo</h5>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVehiculo">+</button>
+                                <div class="mb-3">
+                                    <label for="dominioVehiculo" class="form-label">Año</label>
+                                    <input type="number" class="form-control" id="dominioVehiculo" placeholder="año">
                                 </div>
-                                
-                                <!-- Modal Vehiculo -->
-                                <div class="modal fade" id="modalVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar nuevo Vehiculo</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="card mb-3">
-                                            <div class="card-body">             
-                                                <div class="mb-3">
-                                                    <label for="dominioVehiculo" class="form-label">Patente</label>
-                                                    <input type="text" class="form-control" id="dominioVehiculo" placeholder="dominio">
-                                                </div>
-                
-                                                <!-- Marca -->
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        <div class="mb-3">
-                                                            <div class="mb-3">
-                                                                <h5>Marca</h5>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-10">
-                                                                    <select class="form-select" id="marcaVehiculo" aria-label="Default select example" onchange="getModelo()">
-                                                                        <option selected>Seleccione una marca</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-2">
-                                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMarca">+</button>
-                                                                </div>
-                                                            </div> 
-                                                        </div>
-                
-                
-                                                        <!-- Modal Marca -->
-                                                        <div class="modal fade" id="modalMarca" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crear marca nueva</h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="nombreMarca" class="form-label">Nombre</label>
-                                                                        <input type="text" class="form-control" id="nombreMarca" placeholder="nombre">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearMarca()">Confirmar</button>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                
-                                                    </div>
-                                                </div>
-                
-                                                <!-- Modelo -->
-                                                <div class="card mb-3">
-                                                    <div class="card-body">
-                                                        
-                                                        <div class="mb-3">
-                                                            <h5>Modelo</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-10">                                            
-                                                                <select class="form-select" id="modeloVehiculo" aria-label="Default select example" disabled>
-                                                                    <option selected>Seleccione un modelo</option>
-                                                                </select>
-                                                            </div>
-                
-                                                            <div class="col-2">
-                                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modaleModelo">+</button>
-                                                            </div>
-                                                        </div>
-                
-                                                        
-                                                        <!-- Modal Modelo -->
-                                                        <div class="modal fade" id="modaleModelo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="modelModeloLabel"></h1>
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label for="nombreModelo" class="form-label">Nombre</label>
-                                                                        <input type="text" class="form-control" id="nombreModelo" placeholder="nombre">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearModelo()">Confirmar</button>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>          
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Finaliza Modal Cliente -->
+
                             </div>
                         </div>
 
@@ -339,6 +297,8 @@
             </form>
         </div>
     </main>
-     
+   
+    
+    <script src="../JS/NuevaOrden.js"></script>
 </body>
 </html>

@@ -1,16 +1,9 @@
 package com.ProgramacionAvanzada.AutoSA.dto;
 
 import java.time.LocalDate;
-//import java.util.List;
 import java.util.List;
 
 import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
-
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-
-//import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,7 +16,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ClienteDto{
     
-    //private List<Vehiculo> vehiculo;
+    private List<Vehiculo> vehiculo;
 
     @NotBlank
     private String nombre;

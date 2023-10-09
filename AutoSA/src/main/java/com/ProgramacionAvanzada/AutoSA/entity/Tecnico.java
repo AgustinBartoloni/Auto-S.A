@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,7 +31,7 @@ public class Tecnico{
     private String email;
     private String domicilio;
 
-    @OneToMany(mappedBy = "tecnico")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "tecnico", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<PersonalDeTrabajo> personalDeTrabajo; 
 

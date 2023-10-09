@@ -40,7 +40,7 @@
                       ABM
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./Servicio.html">Serivicios</a></li>
+                      <li><a class="dropdown-item" href="./Servicio.html">Servicios</a></li>
                       <li><a class="dropdown-item" href="./Vehiculo.html">Vehiculos</a></li>
                       <li><a class="dropdown-item" href="./Marca.html">Marcas</a></li>
                       <li><a class="dropdown-item" href="./Modelo.html">Modelos</a></li>
@@ -52,17 +52,58 @@
           </nav>
     </header>
 
-    <main class="main">
+    <main>
       <div class="container">
-          <form id="OrdenNueva">
-              <div class="card my-3">
-                  <div class="card-body">
-                      <div class="mb-3">
-                          <h2>Buscar orden de trabajo</h2>
-                      </div>
+        <div class="card my-3">
+          <div class="card-body">
+            
+            <div class="mb-3" style="text-align: center;">
+              <h2>Ordenes de trabajos</h2>
+            </div>
+
+            <!-- Opciones para buscar y filtrar Tecnico -->
+            <div class="mb-3">
+              <div class="row">
+                  <div class="col" style="margin: 0px 15px;">
+                      <form class="d-flex" role="search" id="formBusqueda">
+                          <button  class="btn btn-outline-primary" type="submit">Buscar</button>
+                      </form>
                   </div>
+                  <div class="col-9">
+                    <form class="d-flex" role="search" id="formBusqueda">
+                        <input class="form-control me-2" id="inputBusqueda" type="search" placeholder="Ingrese el dato" aria-label="Search">
+                    </form>
+                </div>
+                  <div class="col" style="margin: 0px 15px;">
+                    <select class="form-select" id="selectEstado" aria-label="Default select example" onchange="getInspeccionByEstado()">
+                        <option selected>Filtrar</option>
+                        <option value="1">Tecnico</option>
+                        <option value="2">Estado</option>
+                        <option value="3">Pat. Vehiculo</option>
+                    </select>
+                </div>
               </div>
-          </form>
+          </div>
+
+            <!-- Tabla para cargar Tecnico -->
+            <table class="table" id="tablaTecnico">
+              <thead>
+                  <tr>
+                      <th scope="col">ID</th>
+                      <th scope="col">Pat.Vehiculo</th>
+                      <th scope="col">Marca</th>
+                      <th scope="col">Modelo</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">Acciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+              </tbody>
+          </table>
+
+          </div>
+        </div>
       </div>
   </main>
 </body>

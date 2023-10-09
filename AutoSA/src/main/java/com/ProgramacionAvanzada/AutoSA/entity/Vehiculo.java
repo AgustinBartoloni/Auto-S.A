@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,7 +39,7 @@ public class Vehiculo {
     private Modelo modelo;
     //Un vehiculo puede estar vinculado a muchas ordenes de trabajos
     //@JsonBackReferences se evita que se cree un ciclo infinito entre los vehiculos y la ordenes de trabajos
-    @OneToMany(mappedBy = "vehiculo")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "vehiculo", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<OrdenDeTrabajo> ordenDeTrabajo;  
     //Define las otras variables

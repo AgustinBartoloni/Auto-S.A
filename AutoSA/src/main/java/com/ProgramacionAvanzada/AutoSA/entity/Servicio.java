@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,13 +24,15 @@ public class Servicio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @OneToMany(mappedBy = "servicio")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "servicio", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<DetalleOrdenTrabajo> detalleOrdenTrabajo;  
 
     private String nombre;
+    private String descripcion;
 
-    public Servicio(String nombre){
+    public Servicio(String nombre, String descripcion){
         this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

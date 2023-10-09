@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ProgramacionAvanzada.AutoSA.dto.ClienteDto;
 import com.ProgramacionAvanzada.AutoSA.entity.Cliente;
-import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
 import com.ProgramacionAvanzada.AutoSA.service.ClienteService;
 
 @RestController
@@ -30,20 +29,11 @@ public class ClienteController {
 
     @GetMapping("/list")
     public ResponseEntity<List<Cliente>> findAll() {
-        //List<Cliente> list = clienteService.findAll();
-        //return new ResponseEntity<>(list, HttpStatus.OK);
-        try {
-        List<Cliente> clientes = clienteService.findAll();
-
-        // Inicializa la colección de vehículos de cada cliente antes de devolver la respuesta
-        clientes.forEach(cliente -> Hibernate.initialize(cliente.getVehiculo()));
-
-        return new ResponseEntity<>(clientes, HttpStatus.OK);
-    } catch (Exception e) {
-        e.printStackTrace();
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        List<Cliente> list = clienteService.findAll();
+        list.forEach(cliente -> Hibernate.initialize(cliente.getVehiculo()));
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
-    }
+
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ClienteDto clienteDto){
         
@@ -65,13 +55,6 @@ public class ClienteController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }   
     }
-
-   @GetMapping("/{clienteId}/vehiculo")
-    public ResponseEntity<List<Vehiculo>> listarVehiculosDeCliente(@PathVariable int clienteId) {
-        List<Vehiculo> vehiculos = clienteService.findVehiculosByCliente(clienteId);
-        return new ResponseEntity<>(vehiculos, HttpStatus.OK);
-    }
-
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody ClienteDto clienteDto){
         
