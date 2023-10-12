@@ -1,7 +1,8 @@
 package com.ProgramacionAvanzada.AutoSA.dto;
 
+import com.ProgramacionAvanzada.AutoSA.entity.Persona;
+
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,26 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TecnicoDto {
-    @NotBlank
-    private String nombre;
-    @NotBlank
-    private String apellido;
-    @NotNull
-    private int dni;
-    @NotNull
-    private long telefono;
-    @NotBlank
-    private String email;
-    @NotBlank
-    private String domicilio;
+public class TecnicoDto extends Persona {
 
-    public TecnicoDto(String nombre, String apellido, int dni, long telefono, String email, String domicilio) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.telefono = telefono;
-        this.email = email;
-        this.domicilio = domicilio;
+    public TecnicoDto(@NotBlank String nombre,@NotBlank String apellido,@NotBlank String dni,@NotBlank String telefono,@NotBlank String email,@NotBlank String domicilio) {
+        super(nombre, apellido, dni, telefono, email, domicilio);
     }
 }

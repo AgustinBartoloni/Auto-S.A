@@ -1,5 +1,7 @@
 package com.ProgramacionAvanzada.AutoSA.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +19,11 @@ public class PersonalDeTrabajo {
     private int id;
 
     @ManyToOne
+    @JsonManagedReference
     private Tecnico tecnico;
 
     @ManyToOne
+    @JsonManagedReference
     private OrdenDeTrabajo ordenDeTrabajo;
 
     public PersonalDeTrabajo(OrdenDeTrabajo ordenDeTrabajo, Tecnico tecnico){

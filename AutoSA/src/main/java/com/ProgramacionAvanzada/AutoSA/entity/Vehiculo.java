@@ -3,7 +3,6 @@ package com.ProgramacionAvanzada.AutoSA.entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,6 +28,7 @@ public class Vehiculo {
     private int id;
     //Establece una relacion de muchos a uno con el Cliente.
     //Nombra a la columna en la tabla como cliente_id
+    //@JsonManagedReference es la contraparte del JsonBackReference
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

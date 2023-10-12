@@ -24,7 +24,7 @@ public class TecnicoService {
         return tecnicoRepository.findById(id);
     }
 
-    public Optional<Tecnico> findByDni(int dni){
+    public Optional<Tecnico> findByDni(String dni){
         return tecnicoRepository.findByDni(dni);
     }
 

@@ -2,7 +2,6 @@ package com.ProgramacionAvanzada.AutoSA.controller;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,7 @@ public class ClienteController {
     @GetMapping("/list")
     public ResponseEntity<List<Cliente>> findAll() {
         List<Cliente> list = clienteService.findAll();
-        list.forEach(cliente -> Hibernate.initialize(cliente.getVehiculo()));
+        //list.forEach(cliente -> Hibernate.initialize(cliente.getVehiculo()));
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

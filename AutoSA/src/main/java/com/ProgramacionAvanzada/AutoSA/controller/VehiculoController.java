@@ -63,8 +63,8 @@ public class VehiculoController {
     public ResponseEntity<?> create(@RequestBody VehiculoDto vehiculoDto){
         try {
             //Se intenta obtener el cliente correspondiente al DNI proporcionado en vehiculoDto. Esto se hace llamando al método findByDni en el servicio de cliente (clienteService) y pasando el DNI desde vehiculoDto. El resultado se almacena en clieVehiculo.
-            String clienteDni = vehiculoDto.getCliente().getDni();
-            Cliente clieVehiculo = clienteService.findByDni(clienteDni).get();  
+            int clienteId = vehiculoDto.getCliente().getId();
+            Cliente clieVehiculo = clienteService.findById(clienteId).get();  
             //Si el cliente es distinto de nullo es decir que existe un cliente entonces
             if(clieVehiculo != null){
                 //Se crea un nuevo objeto Vehiculo
