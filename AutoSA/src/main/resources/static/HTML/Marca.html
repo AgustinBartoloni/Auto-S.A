@@ -62,12 +62,13 @@
             </div>
 
             <!-- Opcion para agregar Marca -->
-            <div class="row">
+            <div class="mb-3">
+              <div class="row">
                 <div class="col">
                   <h3>Agregar Marca</h3>
                 </div>
                 <div class="col-9">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalMarca">+</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAgregarMarca">+</button>
                 </div>
               </div>
             </div>
@@ -75,7 +76,7 @@
             <!-- Modal Agregar Marca -->
             <div id="formAgregarMarca">
               <form action="" class="formAgregarMarca">
-                <div class="modal fade" id="modalMarca" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalAgregarMarca" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -84,13 +85,13 @@
                       </div>
                       <div class="modal-body">
                           <div class="mb-3">
-                              <label for="nombreCliente" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
+                              <label for="nombreNuevaMarca" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" id="nombreNuevaMarca" placeholder="nombre">
                           </div>
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Confirmar</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-CrearMarca">Confirmar</button>
                       </div>
                     </div>
                   </div>
@@ -101,7 +102,7 @@
             <!-- Modal Editar Marca -->
             <div id="formEditarMarca">
               <form action="" class="formEditarMarca" >
-                <div class="modal fade" id="modalMarca" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalEditarMarca" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -110,13 +111,13 @@
                       </div>
                       <div class="modal-body">
                           <div class="mb-3">
-                              <label for="nombreCliente" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
+                              <label for="nombreEditarMarca" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" id="nombreEditarMarca" placeholder="nombre">
                           </div>
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Confirmar</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-EditarMarca">Confirmar</button>
                       </div>
                     </div>
                   </div>
@@ -127,31 +128,33 @@
             <!-- Opciones para buscar y filtrar Clientes -->
             <div class="mb-3">
               <div class="row">
-                  <div class="col" style="margin: 0px 15px;">
+                  <div class="col">
                       <form class="d-flex" role="search" id="formBusqueda">
-                          <button  class="btn btn-outline-primary" type="submit">Buscar</button>
+                          <button  class="btn btn-outline-primary" type="submit" id="btn-buscar">Buscar</button>
                       </form>
                   </div>
               </div>
+            </div>
+            <div class="mb-3">
+              <!-- Tabla para cargar Marcas -->
+              <table class="table" id="tablaMarca">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
           </div>
-
-            <!-- Tabla para cargar Marcas -->
-            <table class="table" id="tablaMarca">
-              <thead>
-                  <tr>
-                      <th scope="col">ID</th>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Acciones</th>
-                  </tr>
-              </thead>
-              <tbody>
-              </tbody>
-          </table>
-
           </div>
         </div>
       </div>
   </main>
 
+  <script src="../JS/Marca.js"></script>
 </body>
 </html>

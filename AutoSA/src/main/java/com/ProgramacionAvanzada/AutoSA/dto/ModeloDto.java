@@ -11,7 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-
 public class ModeloDto {
     @NotBlank
     private String nombre;

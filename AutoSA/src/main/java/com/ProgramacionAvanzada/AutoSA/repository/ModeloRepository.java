@@ -13,4 +13,5 @@ import com.ProgramacionAvanzada.AutoSA.entity.Modelo;
 public interface ModeloRepository extends JpaRepository<Modelo, Integer>{
     Optional<Modelo> findByNombre (String nombre);
     List<Modelo> findByMarca(Marca marca);
+    List<Modelo> findByMarcaId(int marcaid);
 }

@@ -33,6 +33,11 @@ public class ModeloService {
         return modeloRepository.findByMarca(marca);
     }
 
+
+    public List<Modelo> findByMarcaId(int marcaId) {
+        return modeloRepository.findByMarcaId(marcaId);
+    }
+
     public boolean existsById(int id){
         return modeloRepository.existsById(id);
     }

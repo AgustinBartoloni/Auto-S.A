@@ -40,14 +40,26 @@ public class ModeloController {
         //list.forEach(modelo -> Hibernate.initialize(modelo.getMarca()));
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
-
-    @GetMapping("/listbymarca")
-    public ResponseEntity<List<Modelo>> findByMarca(@RequestParam("marca") int idMarca){
+/*
+    @GetMapping("/listbymarca/{id}")
+    public ResponseEntity<List<Modelo>> findByMarca(@RequestParam("id") int id){
 
         try {
-            Marca marca = marcaService.findById(idMarca).get();
+            Marca marca = marcaService.findById(id).get();
             List<Modelo> list = modeloService.findByMarca(marca);
             return new ResponseEntity<>(list, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+*/
+    // Endpoint para obtener modelos por ID de marca
+    @GetMapping("/listByMarca/{marcaId}")
+    public ResponseEntity<List<Modelo>> findByMarcaId(@PathVariable int marcaId) {
+        try {
+            List<Modelo> modelos = modeloService.findByMarcaId(marcaId);
+            return new ResponseEntity<>(modelos, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+//Es una clase hija de Persona donde hereda todos sus atributos 
 @Entity
 @Getter
 @Setter

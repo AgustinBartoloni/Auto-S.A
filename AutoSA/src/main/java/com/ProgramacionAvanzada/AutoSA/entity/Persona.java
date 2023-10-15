@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 //@Inheritance(strategy = InheritanceType.JOINED)
 //@Entity
+//@MappedSuperClass Identifica a la clase como una clase padre que se va a usar como plantilla y no se mapea en la base de datos
 @Getter
 @Setter
 @NoArgsConstructor

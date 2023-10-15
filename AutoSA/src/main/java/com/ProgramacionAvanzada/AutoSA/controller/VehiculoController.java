@@ -62,8 +62,9 @@ public class VehiculoController {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody VehiculoDto vehiculoDto){
         try {
-            //Se intenta obtener el cliente correspondiente al DNI proporcionado en vehiculoDto. Esto se hace llamando al método findByDni en el servicio de cliente (clienteService) y pasando el DNI desde vehiculoDto. El resultado se almacena en clieVehiculo.
+            //Se crea una variable clienteId que alamacena el id del cliente, este se obtiene a traves del parametro vehiculoDto, que a su ves tiene un objeto cliente con el metodo getId
             int clienteId = vehiculoDto.getCliente().getId();
+            //Se crea un objeto de cliente llamado clieVehiculo con los datos del cliente obtenidos por el metodo findById(clienteId).get() de la clase clienteService
             Cliente clieVehiculo = clienteService.findById(clienteId).get();  
             //Si el cliente es distinto de nullo es decir que existe un cliente entonces
             if(clieVehiculo != null){
