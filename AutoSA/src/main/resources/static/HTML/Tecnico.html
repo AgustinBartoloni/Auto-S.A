@@ -61,21 +61,20 @@
               <h2>Tecnico</h2>
             </div>
 
-            <!-- Opcion para agregar cliente -->
+            <!-- Opcion para agregar -->
             <div class="row">
                 <div class="col-3">
                   <h3>Agregar Tecnico</h3>
                 </div>
                 <div class="col-9">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTecnico">+</button>
                 </div>
               </div>
-            </div>
 
             <!-- Modal Agregar Cliente -->
-            <div id="formAgregarCliente">
-              <form action="" class="formAgregarCliente">
-                <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div id="formAgregarTecnico">
+              <form action="" class="formAgregarTecnico">
+                <div class="modal fade" id="modalTecnico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -84,33 +83,38 @@
                       </div>
                       <div class="modal-body">
                           <div class="mb-3">
-                              <label for="nombreCliente" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
+                              <label for="nombreNuevoTecnico" class="form-label">Nombre</label>
+                              <input type="text" class="form-control" id="nombreNuevoTecnico" placeholder="nombre">
                           </div>
 
                           <div class="mb-3">
-                              <label for="apellidoCliente" class="form-label">Apellido</label>
-                              <input type="text" class="form-control" id="apellidoCliente" placeholder="apellido">
+                              <label for="apellidoNuevoTecnico" class="form-label">Apellido</label>
+                              <input type="text" class="form-control" id="apellidoNuevoTecnico" placeholder="apellido">
                           </div>
 
                           <div class="mb-3">
-                              <label for="dniCliente" class="form-label">DNI</label>
-                              <input type="number" class="form-control" id="dniCliente" placeholder="documento">
+                              <label for="dniNuevoTecnico" class="form-label">DNI</label>
+                              <input type="number" class="form-control" id="dniNuevoTecnico" placeholder="documento">
                           </div>
 
                           <div class="mb-3">
-                              <label for="telefonoCliente" class="form-label">Teléfono</label>
-                              <input type="number" class="form-control" id="telefonoCliente" placeholder="teléfono">
+                              <label for="telefonoNuevoTecnico" class="form-label">Teléfono</label>
+                              <input type="number" class="form-control" id="telefonoNuevoTecnico" placeholder="teléfono">
                           </div>
 
                           <div class="mb-3">
-                              <label for="emailCliente" class="form-label">Email</label>
-                              <input type="email" class="form-control" id="emailCliente" placeholder="email">
+                              <label for="emailNuevoTecnico" class="form-label">Email</label>
+                              <input type="email" class="form-control" id="emailNuevoTecnico" placeholder="email@ejemplo.com">
                           </div>
+
+                          <div class="mb-3">
+                            <label for="domicilioNuevoTecnico" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="domicilioNuevoTecnico" placeholder="calle altura">
+                        </div>
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Confirmar</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-AgregarTecnico">Confirmar</button>
                       </div>
                     </div>
                   </div>
@@ -119,9 +123,9 @@
             </div>
 
             <!-- Modal Editar Cliente -->
-            <div id="formEditarCliente">
-              <form action="" class="formEditarCliente" >
-                <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div id="formEditarTecnico">
+              <form action="" class="formEditarTecnico" >
+                <div class="modal fade" id="modalEditarTecnico" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -129,34 +133,39 @@
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                          <div class="mb-3">
-                              <label for="nombreCliente" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
-                          </div>
+                        <div class="mb-3">
+                          <label for="nombreEditarTecnico" class="form-label">Nombre</label>
+                          <input type="text" class="form-control" id="nombreEditarTecnico" placeholder="nombre">
+                      </div>
 
-                          <div class="mb-3">
-                              <label for="apellidoCliente" class="form-label">Apellido</label>
-                              <input type="text" class="form-control" id="apellidoCliente" placeholder="apellido">
-                          </div>
+                      <div class="mb-3">
+                          <label for="apellidoEditarTecnico" class="form-label">Apellido</label>
+                          <input type="text" class="form-control" id="apellidoEditarTecnico" placeholder="apellido">
+                      </div>
 
-                          <div class="mb-3">
-                              <label for="dniCliente" class="form-label">DNI</label>
-                              <input type="number" class="form-control" id="dniCliente" placeholder="documento">
-                          </div>
+                      <div class="mb-3">
+                          <label for="dniEditarTecnico" class="form-label">DNI</label>
+                          <input type="number" class="form-control" id="dniEditarTecnico" placeholder="documento">
+                      </div>
 
-                          <div class="mb-3">
-                              <label for="telefonoCliente" class="form-label">Teléfono</label>
-                              <input type="number" class="form-control" id="telefonoCliente" placeholder="teléfono">
-                          </div>
+                      <div class="mb-3">
+                          <label for="telefonoEditarTecnico" class="form-label">Teléfono</label>
+                          <input type="number" class="form-control" id="telefonoEditarTecnico" placeholder="teléfono">
+                      </div>
 
-                          <div class="mb-3">
-                              <label for="emailCliente" class="form-label">Email</label>
-                              <input type="email" class="form-control" id="emailCliente" placeholder="email">
-                          </div>
+                      <div class="mb-3">
+                          <label for="emailEditarTecnico" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="emailEditarTecnico" placeholder="email@ejemplo.com">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="domicilioEditarTecnico" class="form-label">Email</label>
+                        <input type="text" class="form-control" id="domicilioEditarTecnico" placeholder="calle altura">
+                      </div>
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Confirmar</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-EditarTecnico">Confirmar</button>
                       </div>
                     </div>
                   </div>
@@ -165,28 +174,28 @@
             </div>
 
             <!-- Opciones para buscar y filtrar Tecnico -->
-            <div class="mb-3">
+            <div class="mb-3" style="margin-top: 5px;">
               <div class="row">
-                  <div class="col" style="margin: 0px 15px;">
+                  <div class="col">
                       <form class="d-flex" role="search" id="formBusqueda">
-                          <button  class="btn btn-outline-primary" type="submit">Buscar</button>
+                          <button  class="btn btn-outline-primary" type="submit" id="btn-Buscar">Buscar</button>
                       </form>
                   </div>
                   <div class="col-9">
                     <form class="d-flex" role="search" id="formBusqueda">
-                        <input class="form-control me-2" id="inputBusqueda" type="search" placeholder="Ingrese el dato" aria-label="Search">
+                      <input type="text" class="form-control" id="input-TablaTecnico" placeholder="Ingrese el dato" disabled>
                     </form>
                 </div>
-                  <div class="col" style="margin: 0px 15px;">
-                    <select class="form-select" id="selectEstado" aria-label="Default select example" onchange="getInspeccionByEstado()">
+                  <div class="col">
+                    <select class="form-select" id="selectFiltrar" aria-label="Default select example">
                         <option selected>Filtrar</option>
                         <option value="1">Dni</option>
-                        <option value="2">Apellido</option>
-                        <option value="3">Legajo</option>
+                        <option value="2">Legajo</option>
+                        <option value="3">Nombre</option>
                     </select>
                 </div>
               </div>
-          </div>
+            </div>
 
             <!-- Tabla para cargar Tecnico -->
             <table class="table" id="tablaTecnico">
@@ -198,18 +207,18 @@
                       <th scope="col">Nombre</th>
                       <th scope="col">Teléfono</th>
                       <th scope="col">Email</th>
+                      <th scope="col">Domicilio</th>
                       <th scope="col">Acciones</th>
                   </tr>
               </thead>
               <tbody>
               </tbody>
-          </table>
-
+            </table>
           </div>
         </div>
       </div>
-  </main>
+    </main>
 
-
+<script src="../JS/Tecnico.js"></script>
 </body>
 </html>

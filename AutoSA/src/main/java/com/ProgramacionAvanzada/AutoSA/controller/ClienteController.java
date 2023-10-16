@@ -1,6 +1,7 @@
 package com.ProgramacionAvanzada.AutoSA.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -88,16 +89,38 @@ public class ClienteController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/by/{dni}")
-    public ResponseEntity<Cliente> findByDni(@PathVariable("dni")String dni){
+    @GetMapping("/listByDni/{dni}")
+    public ResponseEntity<Optional<Cliente>> findByDni(@PathVariable String dni){
 
         try {
-            Cliente cliente = clienteService.findByDni(dni).get();
+            Optional<Cliente> cliente = clienteService.findByDni(dni);
             return new ResponseEntity<>(cliente, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        }  
 
         
+    }
+
+    @GetMapping("/listById/{id}")
+    public ResponseEntity<Optional<Cliente>> findById(@PathVariable int id){
+
+        try {
+            Optional<Cliente> cliente = clienteService.findById(id);
+            return new ResponseEntity<>(cliente, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }        
+    }
+
+    @GetMapping("/listByNombre/{nombre}")
+    public ResponseEntity<List<Cliente>> findByNombre(@PathVariable String nombre){
+
+        try {
+            List<Cliente> clientes = clienteService.findByNombre(nombre);
+            return new ResponseEntity<>(clientes, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }        
     }
 }

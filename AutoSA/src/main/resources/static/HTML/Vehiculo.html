@@ -63,12 +63,11 @@
 
             <!-- Opcion para agregar Vehiculo -->
             <div class="row">
-                <div class="col">
-                  <h3>Agregar Vehiculo</h3>
-                </div>
-                <div class="col-9">
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
-                </div>
+              <div class="col">
+                <h3>Agregar Vehiculo</h3>
+              </div>
+              <div class="col-9">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
               </div>
             </div>
 
@@ -208,18 +207,19 @@
                   </div>
                   <div class="col-9">
                     <form class="d-flex" role="search" id="formBusqueda">
-                        <input class="form-control me-2" id="inputBusqueda" type="search" placeholder="Ingrese el dato" aria-label="Search">
+                      <select class="form-select" id="select-TablaVehiculo" aria-label="Default select example" disabled></select>
                     </form>
                 </div>
-                  <div class="col" style="margin: 0px 15px;">
-                    <select class="form-select" id="selectEstado" aria-label="Default select example" onchange="getInspeccionByEstado()">
-                        <option selected>Filtrar</option>
+                  <div class="col">
+                    <select class="form-select" id="selectFiltrar" aria-label="Default select example">
+                        <option selected value="0">Filtrar</option>
                         <option value="1">Patente</option>
                         <option value="2">Marca</option>
+                        <option value="3">Cliente</option>
                     </select>
                 </div>
               </div>
-          </div>
+            </div>
 
             <!-- Tabla para cargar Clientes -->
             <table class="table" id="tablaInspectores">
@@ -235,12 +235,12 @@
               </thead>
               <tbody>
               </tbody>
-          </table>
-
+            </table>
           </div>
         </div>
+        </div>
       </div>
-  </main>
+    </main>
 
 </body>
 </html>

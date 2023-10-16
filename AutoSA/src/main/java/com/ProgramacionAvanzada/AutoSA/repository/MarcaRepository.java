@@ -9,5 +9,5 @@ import com.ProgramacionAvanzada.AutoSA.entity.Marca;
 
 @Repository
 public interface MarcaRepository extends JpaRepository<Marca, Integer>{
-    Optional<Marca> findByNombre (String nombre);
+    Optional<Marca> findByNombre(String nombre);
 }

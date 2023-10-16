@@ -1,6 +1,7 @@
 package com.ProgramacionAvanzada.AutoSA.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -85,5 +86,38 @@ public class TecnicoController {
         tecnicoService.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/listByDni/{dni}")
+    public ResponseEntity<Optional<Tecnico>> findByDni(@PathVariable String dni){
+
+        try {
+            Optional<Tecnico> tecnico = tecnicoService.findByDni(dni);
+            return new ResponseEntity<>(tecnico, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }        
+    }
+
+    @GetMapping("/listById/{id}")
+    public ResponseEntity<Optional<Tecnico>> findById(@PathVariable int id){
+
+        try {
+            Optional<Tecnico> tecnico = tecnicoService.findById(id);
+            return new ResponseEntity<>(tecnico, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }        
+    }
+
+    @GetMapping("/listByNombre/{nombre}")
+    public ResponseEntity<List<Tecnico>> findByNombre(@PathVariable String nombre){
+
+        try {
+            List<Tecnico> tecnicos = tecnicoService.findByNombre(nombre);
+            return new ResponseEntity<>(tecnicos, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }        
     }
 }

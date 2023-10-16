@@ -24,6 +24,14 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
+    public void deleteById(int id){
+        clienteRepository.deleteById(id);
+    }
+
+    public boolean existsById(int id) {
+        return clienteRepository.existsById(id);
+    }
+
     public Optional<Cliente> findById(int id){
         return clienteRepository.findById(id);
     }
@@ -32,11 +40,7 @@ public class ClienteService {
         return clienteRepository.findByDni(dni);
     }
 
-    public void deleteById(int id){
-        clienteRepository.deleteById(id);
-    }
-
-    public boolean existsById(int id) {
-        return clienteRepository.existsById(id);
+    public List<Cliente> findByNombre(String nombre){
+        return clienteRepository.findByNombre(nombre);
     }
 }

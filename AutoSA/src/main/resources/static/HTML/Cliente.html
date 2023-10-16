@@ -63,16 +63,15 @@
 
               <!-- Opcion para agregar cliente -->
               <div class="row">
-                  <div class="col">
-                    <h3>Agregar Cliente</h3>
-                  </div>
-                  <div class="col-9">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
-                  </div>
+                <div class="col">
+                  <h3>Agregar Cliente</h3>
+                </div>
+                <div class="col-9">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
                 </div>
               </div>
 
-              <!-- Modal Agregar Cliente -->
+              <!-- Modal Agregar  -->
               <div id="formAgregarCliente">
                 <form action="" class="formAgregarCliente">
                   <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -84,33 +83,38 @@
                         </div>
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="nombreCliente" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
+                                <label for="nombreNuevoCliente" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombreNuevoCliente" placeholder="nombre">
                             </div>
 
                             <div class="mb-3">
-                                <label for="apellidoCliente" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellidoCliente" placeholder="apellido">
+                                <label for="apellidoNuevoCliente" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellidoNuevoCliente" placeholder="apellido">
                             </div>
 
                             <div class="mb-3">
-                                <label for="dniCliente" class="form-label">DNI</label>
-                                <input type="number" class="form-control" id="dniCliente" placeholder="documento">
+                                <label for="dniNuevoCliente" class="form-label">DNI</label>
+                                <input type="number" class="form-control" id="dniNuevoCliente" placeholder="documento">
                             </div>
 
                             <div class="mb-3">
-                                <label for="telefonoCliente" class="form-label">Teléfono</label>
-                                <input type="number" class="form-control" id="telefonoCliente" placeholder="teléfono">
+                                <label for="telefonoNuevoCliente" class="form-label">Teléfono</label>
+                                <input type="number" class="form-control" id="telefonoNuevoCliente" placeholder="teléfono">
                             </div>
 
                             <div class="mb-3">
-                                <label for="emailCliente" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="emailCliente" placeholder="email">
+                                <label for="emailNuevoCliente" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailNuevoCliente" placeholder="email@ejemplo.com">
                             </div>
+
+                            <div class="mb-3">
+                              <label for="domicilioNuevoCliente" class="form-label">Domicilio</label>
+                              <input type="email" class="form-control" id="domicilioNuevoCliente" placeholder="domicilio">
+                          </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Confirmar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-AgregarCliente">Confirmar</button>
                         </div>
                       </div>
                     </div>
@@ -118,10 +122,61 @@
                 </form>
               </div>
 
-              <!-- Modal Editar Cliente -->
+              <!-- Modal Editar  -->
               <div id="formEditarCliente">
                 <form action="" class="formEditarCliente" >
-                  <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="modalEditarCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar nuevo cliente</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="nombreEditarCliente" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombreEditarCliente" placeholder="nombre">
+                            </div>
+  
+                            <div class="mb-3">
+                                <label for="apellidoEditarCliente" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="apellidoEditarCliente" placeholder="apellido">
+                            </div>
+  
+                            <div class="mb-3">
+                                <label for="dniEditarCliente" class="form-label">DNI</label>
+                                <input type="number" class="form-control" id="dniEditarCliente" placeholder="documento">
+                            </div>
+  
+                            <div class="mb-3">
+                                <label for="telefonoEditarCliente" class="form-label">Teléfono</label>
+                                <input type="number" class="form-control" id="telefonoEditarCliente" placeholder="teléfono">
+                            </div>
+  
+                            <div class="mb-3">
+                                <label for="emailEditarCliente" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailEditarCliente" placeholder="email@ejemplo.com">
+                            </div>
+
+                            <div class="mb-3">
+                              <label for="domicilioEditarCliente" class="form-label">Domicilio</label>
+                              <input type="email" class="form-control" id="domicilioEditarCliente" placeholder="domicilio">
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-EditarCliente">Confirmar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Modal Ver mas detalles  -->
+              <div id="formVerCliente">
+                <form action="" class="formVerCliente" >
+                  <div class="modal fade" id="modalverCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -165,23 +220,24 @@
               </div>
 
               <!-- Opciones para buscar y filtrar  -->
-              <div class="mb-3">
+              <div class="mb-3" style="margin-top: 5px;">
                 <div class="row">
-                    <div class="col" style="margin: 0px 15px;">
+                    <div class="col">
                         <form class="d-flex" role="search" id="formBusqueda">
-                            <button  class="btn btn-outline-primary" type="submit">Buscar</button>
+                            <button  class="btn btn-outline-primary" type="submit" id="btn-Buscar">Buscar</button>
                         </form>
                     </div>
                     <div class="col-9">
                       <form class="d-flex" role="search" id="formBusqueda">
-                          <input class="form-control me-2" id="inputBusqueda" type="search" placeholder="Ingrese el dato" aria-label="Search">
+                          <input class="form-control me-2" id="input-TablaCliente" type="search" placeholder="Ingrese el dato" aria-label="Search" disabled>
                       </form>
                   </div>
-                    <div class="col" style="margin: 0px 15px;">
-                      <select class="form-select" id="selectEstado" aria-label="Default select example" onchange="getInspeccionByEstado()">
+                    <div class="col">
+                      <select class="form-select" aria-label="Default select example" id="selectFiltrar">
                           <option selected>Filtrar</option>
                           <option value="1">Dni</option>
-                          <option value="2">Apellido</option>
+                          <option value="2">Id</option>
+                          <option value="3">Nombre</option>
                       </select>
                   </div>
                 </div>
@@ -197,6 +253,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Teléfono</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Domicilio</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -204,10 +261,10 @@
                 </tbody>
             </table>
 
-            </div>
           </div>
         </div>
+      </div>
     </main>
-
+<script src="../JS/Cliente.js"></script>
 </body>
 </html>

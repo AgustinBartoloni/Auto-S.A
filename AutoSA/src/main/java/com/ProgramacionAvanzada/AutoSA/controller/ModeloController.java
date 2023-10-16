@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ProgramacionAvanzada.AutoSA.dto.ModeloDto;
-import com.ProgramacionAvanzada.AutoSA.entity.Marca;
 import com.ProgramacionAvanzada.AutoSA.entity.Modelo;
 import com.ProgramacionAvanzada.AutoSA.service.MarcaService;
 import com.ProgramacionAvanzada.AutoSA.service.ModeloService;
@@ -41,7 +39,7 @@ public class ModeloController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 /*
-    @GetMapping("/listbymarca/{id}")
+    @GetMapping("/listbymarca/{marca}")
     public ResponseEntity<List<Modelo>> findByMarca(@RequestParam("id") int id){
 
         try {

@@ -20,6 +20,14 @@ public class TecnicoService {
         return tecnicoRepository.findAll();
     }
 
+    public void save(Tecnico tecnico){
+        tecnicoRepository.save(tecnico);
+    }
+
+    public void deleteById(int id){
+        tecnicoRepository.deleteById(id);
+    }
+
     public Optional<Tecnico> findById(int id){
         return tecnicoRepository.findById(id);
     }
@@ -28,19 +36,11 @@ public class TecnicoService {
         return tecnicoRepository.findByDni(dni);
     }
 
-    public Optional<Tecnico> findByNombre(String nombre){
+    public List<Tecnico> findByNombre(String nombre){
         return tecnicoRepository.findByNombre(nombre);
     }
 
     public boolean existsById(int id){
         return tecnicoRepository.existsById(id);
-    }
-
-    public void save(Tecnico tecnico){
-        tecnicoRepository.save(tecnico);
-    }
-
-    public void deleteById(int id){
-        tecnicoRepository.deleteById(id);
     }
 }

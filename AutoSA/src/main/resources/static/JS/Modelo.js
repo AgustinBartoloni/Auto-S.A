@@ -77,9 +77,11 @@ async function getModelos() {
             fila.appendChild(columnaOpciones);
 
             tbody.appendChild(fila);
+            console.log(dataTecnico);
         });
     } catch (error) {
         console.error('Error al cargar las marcas:', error);
+        alert("MIELDA LOCO CEBOLLA")
     }
 }
 
@@ -242,7 +244,7 @@ function crearModelo(){
             nombre: nombreNuevoModelo,
             marca: {
                 id: nuevoModeloMarcaId
-            },
+            }
         }
         
         fetch(url + "/create", {
