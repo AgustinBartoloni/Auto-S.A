@@ -1,22 +1,17 @@
 package com.ProgramacionAvanzada.AutoSA.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,21 +38,21 @@ public class OrdenDeTrabajo {
     @ManyToOne
     @JoinColumn(name = "estadoOrden_id")
     @JsonManagedReference
-    private EstadoOrden estadoOrden;
+    private Estado estado;
 
-    @OneToMany(mappedBy = "ordenDeTrabajo")
-    @JsonBackReference
-    private List<PersonalDeTrabajo> PersonalDeTrabajo;   
+    //@OneToMany(mappedBy = "ordenDeTrabajo")
+    //@JsonBackReference
+    //private List<PersonalDeTrabajo> PersonalDeTrabajo;   
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "ordenDeTrabajo", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<DetalleOrdenTrabajo> detalleordenTrabajo; 
+    //@OneToMany(fetch = FetchType.EAGER,mappedBy = "ordenDeTrabajo", cascade = CascadeType.ALL)
+    //@JsonBackReference
+    //private List<DetalleOrdenTrabajo> detalleordenTrabajo; 
 
-    public OrdenDeTrabajo(String observacion, EstadoOrden estadoOrden, Vehiculo vehiculo, LocalDate fechaCreacion, LocalTime horaCreacion){
+    public OrdenDeTrabajo(String observacion, LocalDate fechaCreacion, LocalTime horaCreacion, Estado estado, Vehiculo vehiculo){
         this.observacion = observacion;
         this.fechaCreacion = fechaCreacion;
         this.horaCreacion = horaCreacion;
-        this.estadoOrden = estadoOrden;
+        this.estado = estado;
         this.vehiculo = vehiculo;
     }
 }

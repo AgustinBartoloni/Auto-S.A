@@ -77,11 +77,9 @@ async function getModelos() {
             fila.appendChild(columnaOpciones);
 
             tbody.appendChild(fila);
-            console.log(dataTecnico);
         });
     } catch (error) {
         console.error('Error al cargar las marcas:', error);
-        alert("MIELDA LOCO CEBOLLA")
     }
 }
 
@@ -154,9 +152,8 @@ const selectTablaMarca = document.getElementById("select-TablaMarca"); //Contien
 
 //Carga el select si se selecciono un filtrado
 selectFiltrar.addEventListener("change", async () => {
-    const valorSeleccionado = selectFiltrar.value;
 
-    if (valorSeleccionado === "1") {
+    if (selectFiltrar.value === "1") {
         selectTablaMarca.disabled = false; // Activa el Select
         try {
             const response = await fetch("http://localhost:8080/marca/list"); // Realiza una petición fetch
@@ -258,7 +255,7 @@ function crearModelo(){
             if (response.ok) {
     
                 getModelos();
-                var modal = new bootstrap.Modal(document.getElementById('modalMarca'));
+                var modal = new bootstrap.Modal(document.getElementById('modalModelo'));
                 modal.hide();
     
             } else {

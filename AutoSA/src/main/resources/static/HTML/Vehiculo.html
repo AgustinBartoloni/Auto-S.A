@@ -67,14 +67,14 @@
                 <h3>Agregar Vehiculo</h3>
               </div>
               <div class="col-9">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVehiculo" id="btn-CargarModalAgregaVehiculo">+</button>
               </div>
             </div>
 
             <!-- Modal Agregar Vehiculo -->
             <div id="formAgregarVehiculo">
               <form action="" class="formAgregarVehiculo">
-                <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="modalVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -84,8 +84,8 @@
                       <div class="modal-body">
                           <!-- Patente -->
                           <div class="mb-3">
-                              <label for="nombreCliente" class="form-label">Patente</label>
-                              <input type="text" class="form-control" id="nombrePatente" placeholder="Patente">
+                              <label for="AgregarNombrePatente" class="form-label">Patente</label>
+                              <input type="text" class="form-control" id="AgregarNombrePatente" placeholder="Patente">
                           </div>
 
                           <!-- Marca -->
@@ -95,7 +95,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <select class="form-select" id="marcaVehiculo" aria-label="Default select example" onchange="getModelo()">
+                                    <select class="form-select" id="select-AgregarMarcaVehiculo" aria-label="Default select example" onchange="getModelo()">
                                         <option selected>Seleccione una marca</option>
                                     </select>
                                 </div>
@@ -109,22 +109,22 @@
                             </div>
                             <div class="row">
                                 <div class="col">                                            
-                                    <select class="form-select" id="modeloVehiculo" aria-label="Default select example" disabled>
+                                    <select class="form-select" id="select-AgregarModeloVehiculo" aria-label="Default select example" disabled>
                                         <option selected>Seleccione un modelo</option>
                                     </select>
                                 </div>
                             </div>
                           </div>
-                          <!-- Telefono -->
+                          <!-- Kilometraje -->
                           <div class="mb-3">
-                              <label for="telefonoCliente" class="form-label">Kilometraje</label>
-                              <input type="number" class="form-control" id="telefonoCliente" placeholder="kilometrake">
+                              <label for="AgregarkilometrajeVehiculo" class="form-label">Kilometraje</label>
+                              <input type="number" class="form-control" id="AgregarkilometrajeVehiculo" placeholder="kilometrake">
                           </div>
 
                           <!-- Año -->
                           <div class="mb-3">
-                              <label for="emailCliente" class="form-label">Año</label>
-                              <input type="email" class="form-control" id="emailCliente" placeholder="email">
+                              <label for="agregarAñoVehiculo" class="form-label">Año</label>
+                              <input type="email" class="form-control" id="AgregarAñoVehiculo" placeholder="año modelo">
                           </div>
 
                           <!-- Cliente -->
@@ -134,7 +134,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <select class="form-select" id="marcaVehiculo" aria-label="Default select example" onchange="getModelo()">
+                                    <select class="form-select" id="select-AgregarClienteVehiculo" aria-label="Default select example" onchange="getModelo()">
                                         <option selected>Seleccione un cliente</option>
                                     </select>
                                 </div>
@@ -143,7 +143,7 @@
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Confirmar</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-AgregarVehiculo">Confirmar</button>
                       </div>
                     </div>
                   </div>
@@ -151,45 +151,79 @@
               </form>
             </div>
 
-            <!-- Modal Editar Cliente -->
-            <div id="formEditarCliente">
-              <form action="" class="formEditarCliente" >
-                <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Modal Editar Vehiculo -->
+            <div id="formEditarVehiculo">
+              <form action="" class="formEditarVehiculo">
+                <div class="modal fade" id="modalEditarVehiculo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">
                       <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">Cargar nuevo cliente</h1>
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Vehiculo</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
+                          <!-- Patente -->
                           <div class="mb-3">
-                              <label for="nombreCliente" class="form-label">Nombre</label>
-                              <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
+                              <label for="EditarNombrePatente" class="form-label">Patente</label>
+                              <input type="text" class="form-control" id="EditarNombrePatente" placeholder="Patente">
                           </div>
 
+                          <!-- Marca -->
                           <div class="mb-3">
-                              <label for="apellidoCliente" class="form-label">Apellido</label>
-                              <input type="text" class="form-control" id="apellidoCliente" placeholder="apellido">
+                            <div class="mb-3">
+                                <label>Marca</label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <select class="form-select" id="select-EditarMarcaVehiculo" aria-label="Default select example" onchange="getModelo()">
+                                        <option selected>Seleccione una marca</option>
+                                    </select>
+                                </div>
+                            </div> 
                           </div>
 
+                          <!-- Modelo -->
                           <div class="mb-3">
-                              <label for="dniCliente" class="form-label">DNI</label>
-                              <input type="number" class="form-control" id="dniCliente" placeholder="documento">
+                            <div class="mb-3">
+                              <label>Modelo</label>
+                            </div>
+                            <div class="row">
+                                <div class="col">                                            
+                                    <select class="form-select" id="select-EditarModeloVehiculo" aria-label="Default select example" disabled>
+                                        <option selected>Seleccione un modelo</option>
+                                    </select>
+                                </div>
+                            </div>
+                          </div>
+                          <!-- Kilometraje -->
+                          <div class="mb-3">
+                              <label for="EditarkilometrajeVehiculo" class="form-label">Kilometraje</label>
+                              <input type="number" class="form-control" id="EditarkilometrajeVehiculo" placeholder="kilometrake">
                           </div>
 
+                          <!-- Año -->
                           <div class="mb-3">
-                              <label for="telefonoCliente" class="form-label">Teléfono</label>
-                              <input type="number" class="form-control" id="telefonoCliente" placeholder="teléfono">
+                              <label for="EditarAñoVehiculo" class="form-label">Año</label>
+                              <input type="email" class="form-control" id="EditarAñoVehiculo" placeholder="año modelo">
                           </div>
 
+                          <!-- Cliente -->
                           <div class="mb-3">
-                              <label for="emailCliente" class="form-label">Email</label>
-                              <input type="email" class="form-control" id="emailCliente" placeholder="email">
-                          </div>
+                            <div class="mb-3">
+                                <label>Cliente</label>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <select class="form-select" id="select-EditarClienteVehiculo" aria-label="Default select example" onchange="getModelo()">
+                                        <option selected>Seleccione un cliente</option>
+                                    </select>
+                                </div>
+                            </div> 
+                        </div>
                       </div>
                       <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearCliente()">Confirmar</button>
+                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-EditarVehiculo">Confirmar</button>
                       </div>
                     </div>
                   </div>
@@ -198,23 +232,24 @@
             </div>
 
             <!-- Opciones para buscar y filtrar Clientes -->
-            <div class="mb-3">
+            <div class="mb-3" style="margin-top: 5px;">
               <div class="row">
-                  <div class="col" style="margin: 0px 15px;">
+                  <div class="col">
                       <form class="d-flex" role="search" id="formBusqueda">
-                          <button class="btn btn-outline-primary" type="submit">Buscar</button>
+                          <button class="btn btn-outline-primary" type="submit" id="btn-Buscar">Buscar</button>
                       </form>
                   </div>
                   <div class="col-9">
                     <form class="d-flex" role="search" id="formBusqueda">
-                      <select class="form-select" id="select-TablaVehiculo" aria-label="Default select example" disabled></select>
+                      <input type="text" class="form-control" id="input-TablaVehiculo" placeholder="Ingrese patente" style="display: none;">
+                      <select class="form-select" aria-label="Default select example" id="select-TablaVehiculo" disabled></select>
                     </form>
                 </div>
                   <div class="col">
                     <select class="form-select" id="selectFiltrar" aria-label="Default select example">
                         <option selected value="0">Filtrar</option>
-                        <option value="1">Patente</option>
-                        <option value="2">Marca</option>
+                        <option value="1">Marca</option>
+                        <option value="2">Patente</option>
                         <option value="3">Cliente</option>
                     </select>
                 </div>
@@ -222,7 +257,7 @@
             </div>
 
             <!-- Tabla para cargar Clientes -->
-            <table class="table" id="tablaInspectores">
+            <table class="table" id="tablaVehiculo">
               <thead>
                   <tr>
                       <th scope="col">Patente</th>
@@ -238,9 +273,8 @@
             </table>
           </div>
         </div>
-        </div>
       </div>
     </main>
-
+<Script src="../JS/Vehiculo.js"></Script>
 </body>
 </html>

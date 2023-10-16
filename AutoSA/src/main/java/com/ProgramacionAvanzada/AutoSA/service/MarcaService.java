@@ -20,6 +20,14 @@ public class MarcaService {
         return marcaRepository.findAll();
     }
 
+    public void save(Marca marca){
+        marcaRepository.save(marca);
+    }
+
+    public void deleteById(int id){
+        marcaRepository.deleteById(id);
+    }
+
     public Optional<Marca> findById(int id){
         return marcaRepository.findById(id);
     }
@@ -30,13 +38,5 @@ public class MarcaService {
 
     public boolean existsById(int id){
         return marcaRepository.existsById(id);
-    }
-
-    public void save(Marca marca){
-        marcaRepository.save(marca);
-    }
-
-    public void deleteById(int id){
-        marcaRepository.deleteById(id);
     }
 }

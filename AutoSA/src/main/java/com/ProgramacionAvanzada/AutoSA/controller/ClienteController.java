@@ -1,5 +1,6 @@
 package com.ProgramacionAvanzada.AutoSA.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +46,7 @@ public class ClienteController {
             clienteDto.getTelefono(),
             clienteDto.getEmail(),
             clienteDto.getDomicilio(),
-            clienteDto.getFechaRevision()
+            clienteDto.getFecha()
             );
 
             clienteService.save(clienteNuevo);
@@ -70,7 +71,7 @@ public class ClienteController {
         cliente.setTelefono(clienteDto.getTelefono());
         cliente.setEmail(clienteDto.getEmail());
         cliente.setDomicilio(clienteDto.getDomicilio());;
-        cliente.setFechaRevision(clienteDto.getFechaRevision());
+        cliente.setFecha(clienteDto.getFecha());
 
         clienteService.save(cliente);
 
@@ -118,6 +119,17 @@ public class ClienteController {
 
         try {
             List<Cliente> clientes = clienteService.findByNombre(nombre);
+            return new ResponseEntity<>(clientes, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }        
+    }
+
+    @GetMapping("/listByFecha/{fecha}")
+    public ResponseEntity<List<Cliente>> findByFecha(@PathVariable LocalDate fecha){
+
+        try {
+            List<Cliente> clientes = clienteService.findByFecha(fecha);
             return new ResponseEntity<>(clientes, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

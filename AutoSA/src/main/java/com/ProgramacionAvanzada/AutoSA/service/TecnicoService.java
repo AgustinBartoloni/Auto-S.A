@@ -13,7 +13,7 @@ import com.ProgramacionAvanzada.AutoSA.repository.TecnicoRepository;
 @Service
 @Transactional
 public class TecnicoService {
-     @Autowired
+    @Autowired
     TecnicoRepository tecnicoRepository;
 
     public List<Tecnico> findAll(){

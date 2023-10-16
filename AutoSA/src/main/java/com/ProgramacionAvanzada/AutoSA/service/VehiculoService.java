@@ -27,21 +27,6 @@ public class VehiculoService {
         return vehiculoRepository.findAll();
     }
 
-    //Devuelve un vehiculo segun el Id que conisidan con el ingresado por el parametro
-    public Optional<Vehiculo> findById(int id){
-        return vehiculoRepository.findById(id);
-    }
-
-    //Devuelve un vehiculo segun su patente que conisidan con el ingresado por el parametro
-    public Optional<Vehiculo> findByPatente(String patente) {
-        return vehiculoRepository.findByPatente(patente);
-    }
-
-    //Lista los vehiculos segun los cliente que conisidan con el ingresado por el parametro
-    public List<Vehiculo> findByCliente(Cliente cliente){
-        return vehiculoRepository.findByCliente(cliente);
-    }
-
     //Guarda vehiculo, instanciando uno mediante los parametros
     public void save(Vehiculo vehiculo){
         vehiculoRepository.save(vehiculo);
@@ -55,5 +40,28 @@ public class VehiculoService {
     //Se fija si ya existe un vehiculo segun su id
     public boolean existsById(int id) {
         return vehiculoRepository.existsById(id);
+    }
+
+    //Devuelve un vehiculo segun el Id que conisidan con el ingresado por el parametro
+    public Optional<Vehiculo> findById(int id){
+        return vehiculoRepository.findById(id);
+    }
+
+    //Devuelve un vehiculo segun su patente que conisidan con el ingresado por el parametro
+    public Optional<Vehiculo> findByPatente(String patente) {
+        return vehiculoRepository.findByPatente(patente);
+    }
+
+    //Lista los vehiculos segun los cliente que conisidan con el ingresado por el parametro
+    public List<Vehiculo> findByClienteId(int id){
+        return vehiculoRepository.findByClienteId(id);
+    }
+    //Lista los vehiculos segun el nombre de la marca
+   // public List<Vehiculo> findByMarcaNombre(String nombre) {
+    //    return vehiculoRepository.findByMarcaNombre(nombre);
+   // }
+
+    public List<Vehiculo> findByCliente(Cliente cliente){
+        return vehiculoRepository.findByCliente(cliente);
     }
 }

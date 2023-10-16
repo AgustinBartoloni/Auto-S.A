@@ -61,18 +61,6 @@
                             <h2>Nueva orden de trabajo</h2>
                         </div>
 
-                        <!-- Fecha y hora -->
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="fecha" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="fecha" name="fecha">
-                            </div>
-                            <div class="col">
-                                <label for="hora" class="form-label">Hora</label>
-                                <input type="time" class="form-control" id="hora">
-                            </div>
-                        </div>
-
                         <!-- Cliente -->
                         <div class="card mb-3">
                             <div class="card-body">
@@ -146,12 +134,11 @@
                                     </div>
                                     </div>
                                 </div>
-                                <!-- Finaliza Modal Cliente -->
                             </div>
                         </div>
 
-                         <!-- Vehiculo -->
-                         <div class="card mb-3">
+                        <!-- Vehiculo -->
+                        <div class="card mb-3">
                             <div class="card-body">
                                 <div class="mb-3">
                                     <h5>Vehículo</h5>
@@ -261,6 +248,10 @@
                                     <input type="number" class="form-control" id="dominioVehiculo" placeholder="año">
                                 </div>
 
+                                <div class="col">
+                                    <h5>Cargar Nuevo Vehiculo</h5>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
+                                </div>
                             </div>
                         </div>
 
@@ -273,6 +264,20 @@
                                     </div>
                                     <select multiple class="form-select" id="tecnico" aria-label="Default select example">
                                         <option selected>Seleccione un tecnico</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Servicios -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="mb-3">
+                                        <h5>Servicios</h5>
+                                    </div>
+                                    <select multiple class="form-select" id="tecnico" aria-label="Default select example">
+                                        <option selected>Seleccione los Servicios</option>
                                     </select>
                                 </div>
                             </div>

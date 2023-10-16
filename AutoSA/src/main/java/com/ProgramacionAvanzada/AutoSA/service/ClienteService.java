@@ -1,5 +1,6 @@
 package com.ProgramacionAvanzada.AutoSA.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +43,9 @@ public class ClienteService {
 
     public List<Cliente> findByNombre(String nombre){
         return clienteRepository.findByNombre(nombre);
+    }
+
+    public List<Cliente> findByFecha(LocalDate fecha){
+        return clienteRepository.findByFecha(fecha);
     }
 }

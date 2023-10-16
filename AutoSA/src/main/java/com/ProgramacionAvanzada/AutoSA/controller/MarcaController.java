@@ -1,6 +1,7 @@
 package com.ProgramacionAvanzada.AutoSA.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,6 +73,17 @@ public class MarcaController {
         marcaService.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/listByNombre/{nombre}")
+    public ResponseEntity<Optional<Marca>> findByNombre(@PathVariable String nombre) {
+        try {
+            Optional<Marca> marca = marcaService.findByNombre(nombre);
+            return new ResponseEntity<>(marca, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

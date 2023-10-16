@@ -17,9 +17,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ClienteDto extends Persona{   
     @NotNull
-    private LocalDate fechaRevision;
-    public ClienteDto(@NotBlank String nombre,@NotBlank String apellido,@NotBlank String dni,@NotBlank String telefono,@NotBlank String email,@NotBlank String domicilio, LocalDate fechaRevision) {
+    private LocalDate fecha;
+    public ClienteDto(@NotBlank String nombre,@NotBlank String apellido,@NotBlank String dni,@NotBlank String telefono,@NotBlank String email,@NotBlank String domicilio, LocalDate fecha) {
         super(nombre, apellido, dni, telefono, email, domicilio);
-        this.fechaRevision = fechaRevision;
+        this.fecha = fecha;
     }
 }

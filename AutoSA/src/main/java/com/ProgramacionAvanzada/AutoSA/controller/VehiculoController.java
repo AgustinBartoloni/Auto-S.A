@@ -1,6 +1,7 @@
 package com.ProgramacionAvanzada.AutoSA.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,18 +43,6 @@ public class VehiculoController {
         //Llama al metodo findAll de la clase VehiculoService que realiza la recuperacion de datos de la base de datos.
         List<Vehiculo> list = vehiculoService.findAll();
         //El método crea un objeto ResponseEntity que envuelve la lista list y un código de estado HTTP HttpStatus.OK (que indica una respuesta exitosa)
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-
-    //se utiliza para indicar que este método maneja solicitudes HTTP GET a la ruta "/listbyclie/{id}
-    // Este método tiene un parámetro, @PathVariable("id") int id, que captura el valor del ID del cliente desde la URL.
-    @GetMapping("/listbyclie/{id}")
-    public ResponseEntity<List<Vehiculo>> findByCliente(@PathVariable("id") int id){
-        //Se llama al servicio de clientes (clienteService) para buscar el cliente correspondiente al ID proporcionado utilizando el método findById. El resultado se almacena en la variable cliente.
-        Cliente cliente = clienteService.findById(id).get();
-        //Se utiliza el objeto cliente para llamar al servicio de vehículos (vehiculoService) y recuperar una lista de vehículos asociados a ese cliente utilizando el método findByCliente.
-        List<Vehiculo> list = vehiculoService.findByCliente(cliente);
-        //Finalmente, se devuelve una respuesta HTTP con el estado 200 OK (HttpStatus.OK) que incluye la lista de vehículos en formato JSON en el cuerpo de la respuesta.
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -123,4 +112,43 @@ public class VehiculoController {
         //Finalmente, se devuelve una respuesta HTTP con el estado 200 OK (HttpStatus.OK) para indicar que la eliminación se realizó con éxito.
         return new ResponseEntity<>(HttpStatus.OK);
     }
+/*
+    @GetMapping("/listByMarcaNombre/{nombre}")
+    public ResponseEntity<List<Vehiculo>> findByMarcaNombre(@PathVariable String nombre){
+        try {
+
+            //Se utiliza el objeto cliente para llamar al servicio de vehículos (vehiculoService) y recuperar una lista de vehículos asociados a ese cliente utilizando el método findByCliente.
+            List<Vehiculo> list = vehiculoService.findByMarcaNombre(nombre);
+            //Finalmente, se devuelve una respuesta HTTP con el estado 200 OK (HttpStatus.OK) que incluye la lista de vehículos en formato JSON en el cuerpo de la respuesta.
+        return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+*/
+    //se utiliza para indicar que este método maneja solicitudes HTTP GET a la ruta "/listbyclie/{id}
+    // Este método tiene un parámetro, @PathVariable("id") int id, que captura el valor del ID del cliente desde la URL.
+    @GetMapping("/listByClienteId/{id}")
+    public ResponseEntity<List<Vehiculo>> findByClienteId(@PathVariable("id") int id){
+        try {
+            Cliente cliente = clienteService.findById(id).get();
+            List<Vehiculo> list = vehiculoService.findByCliente(cliente);
+            //Finalmente, se devuelve una respuesta HTTP con el estado 200 OK (HttpStatus.OK) que incluye la lista de vehículos en formato JSON en el cuerpo de la respuesta.
+            return new ResponseEntity<>(list, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/listByPatente/{patente}")
+    public ResponseEntity<Optional<Vehiculo>> findByClienteId(@PathVariable String patente){
+        try {
+            Optional<Vehiculo> vehiculo = vehiculoService.findByPatente(patente);
+            //Finalmente, se devuelve una respuesta HTTP con el estado 200 OK (HttpStatus.OK) que incluye la lista de vehículos en formato JSON en el cuerpo de la respuesta.
+            return new ResponseEntity<>(vehiculo, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

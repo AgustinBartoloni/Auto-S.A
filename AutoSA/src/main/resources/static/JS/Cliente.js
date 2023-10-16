@@ -359,6 +359,89 @@ async function getClienteXNombre() {
         console.error('Error al cargar los Tecnicos:', error);
     }
 }
+
+// Filtra por Fecha ----------------------------------------------------------------
+
+async function getClienteXFecha() {
+    try {
+        const response = await fetch(url+`/listByFecha/${inputTablaCliente.value}`);
+        if (!response.ok) {
+            throw new Error(`Error al cargar los Tecnicos: ${response.status}`);
+        }
+        const dataCliente = await response.json();
+
+        const tabla = document.getElementById('tablaCliente');
+        const tbody = tabla.querySelector('tbody');
+        tbody.innerHTML = '';
+
+        dataCliente.forEach(function (cliente) {
+            const fila = document.createElement('tr');
+            const columnaId = document.createElement('td');
+            const columnaDni = document.createElement('td');
+            const columnaApellido = document.createElement('td');
+            const columnaNombre = document.createElement('td');
+            const columnaTelefono = document.createElement('td');
+            const columnaEmail = document.createElement('td');
+            const columnaDomicilio = document.createElement('td');
+            const columnaOpciones = document.createElement('td');
+
+            columnaId.textContent = cliente.id;
+            columnaDni.textContent = cliente.dni;
+            columnaApellido.textContent = cliente.apellido;
+            columnaNombre.textContent = cliente.nombre;
+            columnaTelefono.textContent = cliente.telefono;
+            columnaEmail.textContent = cliente.email;
+            columnaDomicilio.textContent = cliente.domicilio;
+
+            // Botones de modificar y eliminar
+
+            const botonModificar = document.createElement('button');
+            botonModificar.textContent = 'Modificar';
+            botonModificar.classList= 'btn btn-primary';
+            botonModificar.style = "margin: 0px 5px;"
+            botonModificar.setAttribute("data-bs-target", "#modalEditarCliente");
+            botonModificar.setAttribute("data-bs-toggle", "modal");
+            botonModificar.addEventListener('click', function () {
+                editarClienteId = cliente.id;
+            });
+
+            const botonEliminar = document.createElement('button');
+            botonEliminar.textContent = 'Eliminar';
+            botonEliminar.classList= 'btn btn-primary';
+            botonEliminar.style = "margin: 0px 5px;"
+            botonEliminar.addEventListener('click', function () {
+                eliminarCliente(cliente.id);
+            });
+
+            const botonVer = document.createElement('button');
+            botonVer.textContent = 'Ver';
+            botonVer.classList= 'btn btn-primary';
+            botonVer.style = "margin: 0px 5px;"
+            botonVer.setAttribute("data-bs-target", "#modalVerCliente");
+            botonVer.setAttribute("data-bs-toggle", "modal");
+            botonVer.addEventListener('click', function () {
+                editarTecnicoId = tecnico.id;
+            });
+
+            columnaOpciones.appendChild(botonModificar);
+            columnaOpciones.appendChild(botonEliminar);
+            columnaOpciones.appendChild(botonVer);
+
+            fila.appendChild(columnaId);
+            fila.appendChild(columnaDni)
+            fila.appendChild(columnaApellido)
+            fila.appendChild(columnaNombre);
+            fila.appendChild(columnaTelefono);
+            fila.appendChild(columnaEmail)
+            fila.appendChild(columnaDomicilio)
+            fila.appendChild(columnaOpciones);
+
+            tbody.appendChild(fila);
+        });
+    } catch (error) {
+        console.error('Error al cargar los Tecnicos:', error);
+    }
+}
 //Leer opcion de filtrado y buscar -------------------------------------
 
 const btnBuscar = document.getElementById("btn-Buscar");  //Contiene el boton buscar
@@ -383,6 +466,10 @@ selectFiltrar.addEventListener("change", async () => {
         inputTablaCliente.type = "text";
         inputTablaCliente.value = "";
         
+    }else if(selectFiltrar.value === "4"){
+        inputTablaCliente.disabled = false;
+        inputTablaCliente.type = "date";
+        inputTablaCliente.value = "";
     }else{
         inputTablaCliente.disabled = true; //Desactiva el select
         inputTablaCliente.value = "";
@@ -402,6 +489,9 @@ btnBuscar.addEventListener("click", async function(event){
     }else if(selectFiltrar.value === "3"){
         event.preventDefault();
         await getClienteXNombre();
+    }else if(selectFiltrar.value === "4"){
+        event.preventDefault();
+        await getClienteXFecha();
     }else{
         event.preventDefault(); // Prevenir la recarga de la página
         await getCliente();
@@ -425,6 +515,13 @@ function setCliente(){
     var emailNuevoCliente = document.getElementById("emailNuevoCliente").value;
     var domicilioNuevoCliente = document.getElementById("domicilioNuevoCliente").value
     var domicilioNuevoCliente = formatearString(domicilioNuevoCliente);
+
+    const fechaActual = new Date(); // Obtiene la fecha actual
+    const anio = fechaActual.getFullYear(); // Obtiene el año
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Obtiene el mes (agrega 1 ya que los meses se indexan desde 0)
+    const dia = String(fechaActual.getDate()).padStart(2, '0'); // Obtiene el día
+    const fechaFormateada = `${anio}-${mes}-${dia}`;
+    
     if(nombreNuevoCliente.trim() === "" || apellidoNuevoCliente.trim() === "" || dniNuevoCliente.trim() === null || telefonoNuevoCliente.trim() ===  null || emailNuevoCliente.trim() === null || domicilioNuevoCliente.trim() === ""){
         alert("Ningun campo puede estar vacio");
     }else{
@@ -434,7 +531,8 @@ function setCliente(){
             dni : dniNuevoCliente,
             telefono : telefonoNuevoCliente,
             email : emailNuevoCliente,
-            domicilio : domicilioNuevoCliente
+            domicilio : domicilioNuevoCliente,
+            fecha : fechaFormateada
         }
         
         fetch(url + "/create", {
@@ -503,6 +601,11 @@ btnEditarCliente.addEventListener("click", function(){
     var emailEditarCliente = document.getElementById("emailEditarCliente").value;
     var domicilioEditarCliente = document.getElementById("domicilioEditarCliente").value
     var domicilioEditarCliente = formatearString(domicilioEditarCliente);
+    const fechaActual = new Date(); // Obtiene la fecha actual
+    const anio = fechaActual.getFullYear(); // Obtiene el año
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Obtiene el mes (agrega 1 ya que los meses se indexan desde 0)
+    const dia = String(fechaActual.getDate()).padStart(2, '0'); // Obtiene el día
+    const fechaFormateada = `${anio}-${mes}-${dia}`;
     if(nombreEditarCliente.trim() === "" || apellidoEditarCliente.trim() === "" || dniEditarCliente.trim() === null || telefonoEditarCliente.trim() ===  null || emailEditarCliente.trim() === null || domicilioEditarCliente.trim() === ""){
         alert("Ningun campo puede estar vacio");
     }else{
@@ -512,7 +615,8 @@ btnEditarCliente.addEventListener("click", function(){
             dni : dniEditarCliente,
             telefono : telefonoEditarCliente,
             email : emailEditarCliente,
-            domicilio : domicilioEditarCliente
+            domicilio : domicilioEditarCliente,
+            fecha : fechaFormateada
         }
         fetch(url+`/update/${editarClienteId}`, {
             method: "PUT",
