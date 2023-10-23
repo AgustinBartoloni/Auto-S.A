@@ -1,24 +1,22 @@
 const url = "http://localhost:8080/servicio";
 
+// ----------------------------------------------------------------------------
+// formatearTexto -------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
 function formatearString(textoEntrada) {
-    // Divide el string en palabras
-    const palabras = textoEntrada.split(" ");
-  
-    // Inicializa una cadena para almacenar el resultado formateado
-    let resultado = "";
-  
+    const palabras = textoEntrada.split(" ");// Divide el string en palabras
+    let resultado = "";// Inicializa una cadena para almacenar el resultado formateado
     // Recorre cada palabra y forma el resultado
     for (const palabra of palabras) {
       if (palabra) { // Verifica si la palabra no está en blanco
-        // Convierte la primera letra en mayúscula y el resto en minúscula
-        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();
-        resultado += palabraFormateada + " ";
+        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();// Convierte la primera letra en mayúscula y el resto en minúscula
+        resultado += palabraFormateada + " "; //concatena
       }
     }
-  
-    // Elimina el espacio en blanco adicional al final y retorna el resultado formateado
-    return resultado.trim();
+    return resultado.trim();// Elimina el espacio en blanco adicional al final y retorna el resultado formateado
 }
+
 
 // ----------------------------------------------------------------------------
 // Cargar Tabla ---------------------------------------------------------------
@@ -69,7 +67,7 @@ async function getServicios() {
             botonEliminar.classList= 'btn btn-primary';
             botonEliminar.style = "margin: 0px 5px;"
             botonEliminar.addEventListener('click', function () {
-                eliminarServicio(servicio.id);
+                deleteServicio(servicio.id);
             });
 
             columnaOpciones.appendChild(botonModificar);
@@ -95,56 +93,10 @@ btnBuscar.addEventListener("click", async function(event){
 });
 
 // ----------------------------------------------------------------------------
-// Agregar --------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-
-function crearServicio(){
-    var nombreNuevoServicio = document.getElementById("nombreNuevoServicio").value;
-    var nombreNuevoServicio = formatearString(nombreNuevoServicio);
-    var descripcionNuevoServicio = document.getElementById("descripcionNuevoServicio").value;
-    if(nombreNuevoServicio.trim() === ""){
-        alert("El nombre de la marca no puede estar vacio");
-    }else{
-        var nuevoServicioData = {
-            nombre: nombreNuevoServicio,
-            descripcion : descripcionNuevoServicio
-        }
-        
-        fetch(url + "/create", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(nuevoServicioData)
-        })
-        .then(function (response) {
-            if (response.ok) {
-    
-                getServicios();
-                var modal = new bootstrap.Modal(document.getElementById('modalAgregarServicio'));
-                modal.hide();
-    
-            } else {
-                console.log("Respuesta de red OK pero respuesta HTTP no OK");
-            }
-        })
-        .catch(error => {
-            console.error('Error en la solicitud POST:', error);
-        });
-    }
-}
-
-const btnAgregarServicio = document.getElementById("btn-CrearServicio");
-btnAgregarServicio.addEventListener("click", function(){
-    crearServicio();
-})
-
-
-// ----------------------------------------------------------------------------
 // Eliminar --------------------------------------------------------------------
 // ----------------------------------------------------------------------------
 
-function eliminarServicio(id){
+function deleteServicio(id){
     // Realiza la solicitud DELETE a la URL con el ID como parámetro
     fetch(url+`/delete/${id}`, {
         method: "DELETE"
@@ -196,3 +148,47 @@ btnEditarServicio.addEventListener("click", function(){
     }
 })
 
+// ----------------------------------------------------------------------------
+// Agregar --------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
+function setServicio(){
+    var nombreNuevoServicio = document.getElementById("nombreNuevoServicio").value;
+    var nombreNuevoServicio = formatearString(nombreNuevoServicio);
+    var descripcionNuevoServicio = document.getElementById("descripcionNuevoServicio").value;
+    if(nombreNuevoServicio.trim() === "" || descripcionNuevoServicio === ""){
+        alert("Revise que los campós no esten vacio");
+    }else{
+        var nuevoServicioData = {
+            nombre: nombreNuevoServicio,
+            descripcion : descripcionNuevoServicio
+        }
+        
+        fetch(url + "/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(nuevoServicioData)
+        })
+        .then(function (response) {
+            if (response.ok) {
+    
+                getServicios();
+                var modal = new bootstrap.Modal(document.getElementById('modalAgregarServicio'));
+                modal.hide();
+    
+            } else {
+                console.log("Respuesta de red OK pero respuesta HTTP no OK");
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud POST:', error);
+        });
+    }
+}
+
+const btnAgregarServicio = document.getElementById("btn-CrearServicio");
+btnAgregarServicio.addEventListener("click", function(){
+    setServicio();
+})

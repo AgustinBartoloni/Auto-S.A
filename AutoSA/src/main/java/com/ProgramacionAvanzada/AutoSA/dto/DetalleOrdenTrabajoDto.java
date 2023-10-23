@@ -17,7 +17,7 @@ public class DetalleOrdenTrabajoDto {
     @NotNull
     private OrdenDeTrabajo ordenDeTrabajo;
 
-    public DetalleOrdenTrabajoDto(Servicio servicio, OrdenDeTrabajo ordenDeTrabajo){
+    public DetalleOrdenTrabajoDto(OrdenDeTrabajo ordenDeTrabajo, Servicio servicio){
         this.ordenDeTrabajo = ordenDeTrabajo;
         this.servicio = servicio;
     }

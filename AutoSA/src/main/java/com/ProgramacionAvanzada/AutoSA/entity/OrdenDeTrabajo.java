@@ -1,7 +1,5 @@
 package com.ProgramacionAvanzada.AutoSA.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -32,12 +30,10 @@ public class OrdenDeTrabajo {
 
     @ManyToOne
     @JoinColumn(name = "vehiculo_id")
-    @JsonManagedReference
     private Vehiculo vehiculo;
 
     @ManyToOne
     @JoinColumn(name = "estadoOrden_id")
-    @JsonManagedReference
     private Estado estado;
 
     //@OneToMany(mappedBy = "ordenDeTrabajo")

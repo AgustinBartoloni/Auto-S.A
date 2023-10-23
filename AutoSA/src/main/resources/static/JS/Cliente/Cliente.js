@@ -514,13 +514,7 @@ function setCliente(){
     var telefonoNuevoCliente = document.getElementById("telefonoNuevoCliente").value;
     var emailNuevoCliente = document.getElementById("emailNuevoCliente").value;
     var domicilioNuevoCliente = document.getElementById("domicilioNuevoCliente").value
-    var domicilioNuevoCliente = formatearString(domicilioNuevoCliente);
-
-    const fechaActual = new Date(); // Obtiene la fecha actual
-    const anio = fechaActual.getFullYear(); // Obtiene el año
-    const mes = String(fechaActual.getMonth() + 1).padStart(2, '0'); // Obtiene el mes (agrega 1 ya que los meses se indexan desde 0)
-    const dia = String(fechaActual.getDate()).padStart(2, '0'); // Obtiene el día
-    const fechaFormateada = `${anio}-${mes}-${dia}`;
+    var domicilioNuevoCliente = formatearString(domicilioNuevoCliente);s
     
     if(nombreNuevoCliente.trim() === "" || apellidoNuevoCliente.trim() === "" || dniNuevoCliente.trim() === null || telefonoNuevoCliente.trim() ===  null || emailNuevoCliente.trim() === null || domicilioNuevoCliente.trim() === ""){
         alert("Ningun campo puede estar vacio");
@@ -532,7 +526,6 @@ function setCliente(){
             telefono : telefonoNuevoCliente,
             email : emailNuevoCliente,
             domicilio : domicilioNuevoCliente,
-            fecha : fechaFormateada
         }
         
         fetch(url + "/create", {

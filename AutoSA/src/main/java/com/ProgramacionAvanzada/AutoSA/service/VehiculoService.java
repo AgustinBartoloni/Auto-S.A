@@ -56,10 +56,11 @@ public class VehiculoService {
     public List<Vehiculo> findByClienteId(int id){
         return vehiculoRepository.findByClienteId(id);
     }
+
     //Lista los vehiculos segun el nombre de la marca
-   // public List<Vehiculo> findByMarcaNombre(String nombre) {
+    //public List<Vehiculo> findByMarcaNombre(String nombre) {
     //    return vehiculoRepository.findByMarcaNombre(nombre);
-   // }
+    //}
 
     public List<Vehiculo> findByCliente(Cliente cliente){
         return vehiculoRepository.findByCliente(cliente);

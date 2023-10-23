@@ -1,122 +1,100 @@
 const url = "http://localhost:8080/vehiculo"; 
 
-//Funcion para dar formato al texto
-function formatearString(textoEntrada) {
+// ----------------------------------------------------------------------------
+// formatearTexto -------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
-    const palabras = textoEntrada.split(" "); // Divide el string en palabras
-    let resultado = ""; // Inicializa una cadena para almacenar el resultado formateado
-  
+function formatearString(textoEntrada) {
+    const palabras = textoEntrada.split(" ");// Divide el string en palabras
+    let resultado = "";// Inicializa una cadena para almacenar el resultado formateado
     // Recorre cada palabra y forma el resultado
     for (const palabra of palabras) {
-        if (palabra) { // Verifica si la palabra no está en blanco
-            const palabraFormateada = palabra.toUpperCase(); // Convierte toda la palabra en mayúsculas
-            resultado += palabraFormateada + " ";
-        }
+      if (palabra) { // Verifica si la palabra no está en blanco
+        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toUpperCase();// Convierte la primera letra en mayúscula y el resto en minúscula
+        resultado += palabraFormateada + " "; //concatena
+      }
     }
-  
-    return resultado.trim(); // Elimina el espacio en blanco adicional al final y retorna el resultado formateado
+    return resultado.trim();// Elimina el espacio en blanco adicional al final y retorna el resultado formateado
 }
 
 // ----------------------------------------------------------------------------
 // Cargar Tablas --------------------------------------------------------------
 // ----------------------------------------------------------------------------
+//Con For ---------------------------------------------------------------------
+async function llenarTablaFor(data){
+    const tabla = document.getElementById('tablaVehiculo');
+    const tbody = tabla.querySelector('tbody');
+    tbody.innerHTML = '';
 
-// Sin filtros ---------------------------------------------------------------
-var editarVehiculoId;
+    data.forEach(function (vehiculo) {
+        const fila = document.createElement('tr');
+        const columnaPatente = document.createElement('td');
+        const columnaMarca = document.createElement('td');
+        const columnaModelo = document.createElement('td');
+        const columnaAño = document.createElement('td');
+        const columnaKilometraje = document.createElement('td');
+        const columnaOpciones = document.createElement('td');
 
-async function getVehiculos() {
-    try {
-        const response = await fetch(url+'/list');
-        if (!response.ok) {
-            throw new Error(`Error al cargar las marcas: ${response.status}`);
-        }
-        const dataVehiculos = await response.json();
+        columnaPatente.textContent = vehiculo.patente;
+        columnaMarca.textContent = vehiculo.modelo.marca.nombre;
+        columnaModelo.textContent = vehiculo.modelo.nombre;
+        columnaAño.textContent = vehiculo.año;
+        columnaKilometraje.textContent = vehiculo.kilometraje
 
-        const tabla = document.getElementById('tablaVehiculo');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
+        // Botones de modificar y eliminar
 
-        dataVehiculos.forEach(function (vehiculo) {
-            const fila = document.createElement('tr');
-            const columnaPatente = document.createElement('td');
-            const columnaMarca = document.createElement('td');
-            const columnaModelo = document.createElement('td');
-            const columnaAño = document.createElement('td');
-            const columnaKilometraje = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaPatente.textContent = vehiculo.patente;
-            columnaMarca.textContent = vehiculo.modelo.marca.nombre;
-            columnaModelo.textContent = vehiculo.modelo.nombre;
-            columnaAño.textContent = vehiculo.año;
-            columnaKilometraje.textContent = vehiculo.kilometraje
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarVehiculo");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarVehiculoId = vehiculo.id;
-                llenarSelectMarcaEditar();
-                llenarSelectClienteEditar();
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarVehiculo(vehiculo.id);
-            });
-
-            const botonVer = document.createElement('button');
-            botonVer.textContent = 'Ver';
-            botonVer.classList= 'btn btn-primary';
-            botonVer.style = "margin: 0px 5px;"
-            botonVer.setAttribute("data-bs-target", "#modalEditarVehiculo");
-            botonVer.setAttribute("data-bs-toggle", "modal");
-            botonVer.addEventListener('click', function () {
-                editarVehiculoId = vehiculo.id;
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-            columnaOpciones.appendChild(botonVer);
-
-            fila.appendChild(columnaPatente);
-            fila.appendChild(columnaMarca);
-            fila.appendChild(columnaModelo);
-            fila.appendChild(columnaAño);
-            fila.appendChild(columnaKilometraje);
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
+        const botonModificar = document.createElement('button');
+        botonModificar.textContent = 'Modificar';
+        botonModificar.classList= 'btn btn-primary';
+        botonModificar.style = "margin: 0px 5px;"
+        botonModificar.setAttribute("data-bs-target", "#modalEditarVehiculo");
+        botonModificar.setAttribute("data-bs-toggle", "modal");
+        botonModificar.addEventListener('click', function () {
+            editarVehiculoId = vehiculo.id;
+            llenarSelectMarcaEditar();
+            llenarSelectClienteEditar();
         });
-    } catch (error) {
-        console.error('Error al cargar los Vehiculos:', error);
-    }
+
+        const botonEliminar = document.createElement('button');
+        botonEliminar.textContent = 'Eliminar';
+        botonEliminar.classList= 'btn btn-primary';
+        botonEliminar.style = "margin: 0px 5px;"
+        botonEliminar.addEventListener('click', function () {
+            eliminarVehiculo(vehiculo.id);
+        });
+
+        const botonVer = document.createElement('button');
+        botonVer.textContent = 'Ver';
+        botonVer.classList= 'btn btn-primary';
+        botonVer.style = "margin: 0px 5px;"
+        botonVer.setAttribute("data-bs-target", "#modalEditarVehiculo");
+        botonVer.setAttribute("data-bs-toggle", "modal");
+        botonVer.addEventListener('click', function () {
+            editarVehiculoId = vehiculo.id;
+        });
+
+        columnaOpciones.appendChild(botonModificar);
+        columnaOpciones.appendChild(botonEliminar);
+        columnaOpciones.appendChild(botonVer);
+
+        fila.appendChild(columnaPatente);
+        fila.appendChild(columnaMarca);
+        fila.appendChild(columnaModelo);
+        fila.appendChild(columnaAño);
+        fila.appendChild(columnaKilometraje);
+        fila.appendChild(columnaOpciones);
+
+        tbody.appendChild(fila);
+    });
 }
 
-// filtrar por Patente ----------------------------------------------------------------
+//Con If ----------------------------------------------------------------------
 
-async function getVehiculoXPatente() {
-    var patente = formatearString(inputTablaVehiculo.value);
-    try {
-        const response = await fetch(url+`/listByPatente/${patente}`);
-        if (!response.ok) {
-            throw new Error(`Error al cargar las marcas: ${response.status}`);
-        }
-
-        const dataVehiculos = await response.json();
-
-        const tabla = document.getElementById('tablaVehiculo');
+async function llenarTablaIf(data){
+    const tabla = document.getElementById('tablaVehiculo');
         const tbody = tabla.querySelector('tbody');
         tbody.innerHTML = '';
-        vehiculo = dataVehiculos;
+        vehiculo = data;
         if(vehiculo){
             const fila = document.createElement('tr');
             const columnaPatente = document.createElement('td');
@@ -179,68 +157,54 @@ async function getVehiculoXPatente() {
         }else{
             alert("no se encontro vehiculo con patente : " + patente);
         }
+}
+
+// Sin filtros ---------------------------------------------------------------
+var editarVehiculoId;
+
+async function getVehiculos() {
+    try {
+        const response = await fetch(url+'/list');
+        if (!response.ok) {
+            throw new Error(`Error al cargar las marcas: ${response.status}`);
+        }
+        const dataVehiculos = await response.json();
+        llenarTablaFor(dataVehiculos);
     } catch (error) {
-        console.error('Error al cargar las marcas:', error);
+        console.error('Error al cargar los Vehiculos:', error);
     }
 }
 
 // filtrar por Patente ----------------------------------------------------------------
 
+async function getVehiculoXPatente() {
+    var patente = formatearString(inputTablaVehiculo.value);
+    try {
+        const response = await fetch(url+`/listByPatente/${patente}`);
+        if (!response.ok) {
+            throw new Error(`Error al cargar las marcas: ${response.status}`);
+        }
+
+        const dataVehiculos = await response.json();
+
+        llenarTablaIf(dataVehiculos);
+    } catch (error) {
+        console.error('Error al cargar las marcas:', error);
+    }
+}
+
+// filtrar por Marca ----------------------------------------------------------------
+
 async function getVehiculoXMarca() {
     try {
         const response = await fetch(url+`/listByMarca/${selectTablaMarca.value}`);
         if (!response.ok) {
-            throw new Error(`Error al cargar las marcas: ${response.status}`);
+            throw new Error(`Error al cargar los vehivulos: ${response.status}`);
         }
-        const dataModelos = await response.json();
+        const dataVehiculos = await response.json();
 
-        const tabla = document.getElementById('tablaModelo');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
+        llenarTablaFor(dataVehiculos);
 
-        dataModelos.forEach(function (modelo) {
-            const fila = document.createElement('tr');
-            const columnaId = document.createElement('td');
-            const columnaNombre = document.createElement('td');
-            const columnaMarca = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaId.textContent = modelo.id;
-            columnaNombre.textContent = modelo.nombre;
-            columnaMarca.textContent = modelo.marca.nombre;
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarModelo");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarModeloId = modelo.id;
-                llenarSelectMarcaEditar();
-                llenarSelectClienteEditar();
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarModelo(modelo.id);
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-
-            fila.appendChild(columnaId);
-            fila.appendChild(columnaNombre);
-            fila.appendChild(columnaMarca);
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
-        });
     } catch (error) {
         console.error('Error al cargar las marcas:', error);
     }
@@ -256,70 +220,7 @@ async function getVehiculoXCliente() {
         }
         const dataVehiculos = await response.json();
 
-        const tabla = document.getElementById('tablaVehiculo');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
-
-        dataVehiculos.forEach(function (vehiculo) {
-            const fila = document.createElement('tr');
-            const columnaPatente = document.createElement('td');
-            const columnaMarca = document.createElement('td');
-            const columnaModelo = document.createElement('td');
-            const columnaAño = document.createElement('td');
-            const columnaKilometraje = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaPatente.textContent = vehiculo.patente;
-            columnaMarca.textContent = vehiculo.modelo.marca.nombre;
-            columnaModelo.textContent = vehiculo.modelo.nombre;
-            columnaAño.textContent = vehiculo.año;
-            columnaKilometraje.textContent = vehiculo.kilometraje
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarVehiculo");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarVehiculoId = vehiculo.id;
-                llenarSelectMarcaEditar();
-                llenarSelectClienteEditar();
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarVehiculo(vehiculo.id);
-            });
-
-            const botonVer = document.createElement('button');
-            botonVer.textContent = 'Ver';
-            botonVer.classList= 'btn btn-primary';
-            botonVer.style = "margin: 0px 5px;"
-            botonVer.setAttribute("data-bs-target", "#modalEditarVehiculo");
-            botonVer.setAttribute("data-bs-toggle", "modal");
-            botonVer.addEventListener('click', function () {
-                editarVehiculoId = vehiculo.id;
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-            columnaOpciones.appendChild(botonVer);
-
-            fila.appendChild(columnaPatente);
-            fila.appendChild(columnaMarca);
-            fila.appendChild(columnaModelo);
-            fila.appendChild(columnaAño);
-            fila.appendChild(columnaKilometraje);
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
-        });
+        llenarTablaFor(dataVehiculos);
     } catch (error) {
         console.error('Error al cargar las marcas:', error);
     }

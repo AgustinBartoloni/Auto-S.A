@@ -38,8 +38,8 @@ public class MarcaController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody MarcaDto marcaDto){
-
-        if(marcaDto.getNombre().isBlank()){
+        String nombreMarca = marcaDto.getNombre();
+        if(marcaDto.getNombre().isBlank() || marcaService.existsByNombre(nombreMarca)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 

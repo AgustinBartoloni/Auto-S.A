@@ -39,4 +39,8 @@ public class MarcaService {
     public boolean existsById(int id){
         return marcaRepository.existsById(id);
     }
+
+    public boolean existsByNombre(String nombre) {
+        return marcaRepository.existsByNombre(nombre);
+    }
 }

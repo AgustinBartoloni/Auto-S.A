@@ -112,8 +112,8 @@ public class VehiculoController {
         //Finalmente, se devuelve una respuesta HTTP con el estado 200 OK (HttpStatus.OK) para indicar que la eliminación se realizó con éxito.
         return new ResponseEntity<>(HttpStatus.OK);
     }
-/*
-    @GetMapping("/listByMarcaNombre/{nombre}")
+
+ /*    @GetMapping("/listByMarcaNombre/{nombre}")
     public ResponseEntity<List<Vehiculo>> findByMarcaNombre(@PathVariable String nombre){
         try {
 

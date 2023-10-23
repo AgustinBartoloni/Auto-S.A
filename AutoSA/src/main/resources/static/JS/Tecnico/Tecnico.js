@@ -1,42 +1,34 @@
 const url = "http://localhost:8080/tecnico"; 
+// ----------------------------------------------------------------------------
+// formatearTexto -------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
-//Funcion para dar formato al texto
 function formatearString(textoEntrada) {
-
-    const palabras = textoEntrada.split(" "); // Divide el string en palabras
-    let resultado = ""; // Inicializa una cadena para almacenar el resultado formateado
-  
+    const palabras = textoEntrada.split(" ");// Divide el string en palabras
+    let resultado = "";// Inicializa una cadena para almacenar el resultado formateado
     // Recorre cada palabra y forma el resultado
     for (const palabra of palabras) {
       if (palabra) { // Verifica si la palabra no está en blanco
-        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase(); // Convierte la primera letra en mayúscula y el resto en minúscula
-        resultado += palabraFormateada + " ";
+        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();// Convierte la primera letra en mayúscula y el resto en minúscula
+        resultado += palabraFormateada + " "; //concatena
       }
     }
-  
-    return resultado.trim(); // Elimina el espacio en blanco adicional al final y retorna el resultado formateado
+    return resultado.trim();// Elimina el espacio en blanco adicional al final y retorna el resultado formateado
 }
 
 // ----------------------------------------------------------------------------
 // Cargar Tablas --------------------------------------------------------------
 // ----------------------------------------------------------------------------
 
-// Sin filtros ---------------------------------------------------------------
-var editarTecnicoId;
+// Con ForEach ----------------------------------------------------------------
 
-async function getTecnico() {
-    try {
-        const response = await fetch(url+'/list');
-        if (!response.ok) {
-            throw new Error(`Error al cargar las marcas: ${response.status}`);
-        }
-        const dataTecnico = await response.json();
+async function llenarTablaFor(data){
 
-        const tabla = document.getElementById('tablaTecnico');
+    const tabla = document.getElementById('tablaTecnico');
         const tbody = tabla.querySelector('tbody');
         tbody.innerHTML = '';
 
-        dataTecnico.forEach(function (tecnico) {
+        data.forEach(function (tecnico) {
             const fila = document.createElement('tr');
             const columnaLegajo = document.createElement('td');
             const columnaDni = document.createElement('td');
@@ -88,7 +80,84 @@ async function getTecnico() {
             fila.appendChild(columnaOpciones);
 
             tbody.appendChild(fila);
-        });
+    });
+}
+// Con if ---------------------------------------------------------------------
+
+async function llenarTablaIf(data){
+    const tabla = document.getElementById('tablaTecnico');
+        const tbody = tabla.querySelector('tbody');
+        tbody.innerHTML = '';
+        tecnico = data;
+        if (tecnico) {
+            const fila = document.createElement('tr');
+            const columnaLegajo = document.createElement('td');
+            const columnaDni = document.createElement('td');
+            const columnaApellido = document.createElement('td');
+            const columnaNombre = document.createElement('td');
+            const columnaTelefono = document.createElement('td');
+            const columnaEmail = document.createElement('td');
+            const columnaDomicilio = document.createElement('td');
+            const columnaOpciones = document.createElement('td');
+
+            columnaLegajo.textContent = tecnico.id;
+            columnaDni.textContent = tecnico.dni;
+            columnaApellido.textContent = tecnico.apellido;
+            columnaNombre.textContent = tecnico.nombre;
+            columnaTelefono.textContent = tecnico.telefono;
+            columnaEmail.textContent = tecnico.email;
+            columnaDomicilio.textContent = tecnico.domicilio;
+
+            // Botones de modificar y eliminar
+
+            const botonModificar = document.createElement('button');
+            botonModificar.textContent = 'Modificar';
+            botonModificar.classList= 'btn btn-primary';
+            botonModificar.style = "margin: 0px 5px;"
+            botonModificar.setAttribute("data-bs-target", "#modalEditarTecnico");
+            botonModificar.setAttribute("data-bs-toggle", "modal");
+            botonModificar.addEventListener('click', function () {
+                editarTecnicoId = tecnico.id;
+            });
+
+            const botonEliminar = document.createElement('button');
+            botonEliminar.textContent = 'Eliminar';
+            botonEliminar.classList= 'btn btn-primary';
+            botonEliminar.style = "margin: 0px 5px;"
+            botonEliminar.addEventListener('click', function () {
+                eliminarTecnico(tecnico.id);
+            });
+
+            columnaOpciones.appendChild(botonModificar);
+            columnaOpciones.appendChild(botonEliminar);
+
+            fila.appendChild(columnaLegajo);
+            fila.appendChild(columnaDni)
+            fila.appendChild(columnaApellido)
+            fila.appendChild(columnaNombre);
+            fila.appendChild(columnaTelefono);
+            fila.appendChild(columnaEmail)
+            fila.appendChild(columnaDomicilio)
+            fila.appendChild(columnaOpciones);
+
+            tbody.appendChild(fila);
+        }else{
+            alert("No se encontro ningun Tencinco");
+        }
+}
+
+// Sin filtros ---------------------------------------------------------------
+var editarTecnicoId;
+
+async function getTecnico() {
+    try {
+        const response = await fetch(url+'/list');
+        if (!response.ok) {
+            throw new Error(`Error al cargar las marcas: ${response.status}`);
+        }
+        const dataTecnico = await response.json();
+        
+        llenarTablaFor(dataTecnico);
     } catch (error) {
         console.error('Error al cargar los Tecnicos:', error);
     }
@@ -104,66 +173,7 @@ async function getTecnicoXDni() {
             throw new Error(`Error al cargar los Tecnicos: ${response.status}`);
         }
         const dataTecnico = await response.json();
-
-        const tabla = document.getElementById('tablaTecnico');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
-        tecnico = dataTecnico;
-        if (tecnico) {
-            const fila = document.createElement('tr');
-            const columnaLegajo = document.createElement('td');
-            const columnaDni = document.createElement('td');
-            const columnaApellido = document.createElement('td');
-            const columnaNombre = document.createElement('td');
-            const columnaTelefono = document.createElement('td');
-            const columnaEmail = document.createElement('td');
-            const columnaDomicilio = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaLegajo.textContent = tecnico.id;
-            columnaDni.textContent = tecnico.dni;
-            columnaApellido.textContent = tecnico.apellido;
-            columnaNombre.textContent = tecnico.nombre;
-            columnaTelefono.textContent = tecnico.telefono;
-            columnaEmail.textContent = tecnico.email;
-            columnaDomicilio.textContent = tecnico.domicilio;
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarTecnico");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarTecnicoId = tecnico.id;
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarTecnico(tecnico.id);
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-
-            fila.appendChild(columnaLegajo);
-            fila.appendChild(columnaDni)
-            fila.appendChild(columnaApellido)
-            fila.appendChild(columnaNombre);
-            fila.appendChild(columnaTelefono);
-            fila.appendChild(columnaEmail)
-            fila.appendChild(columnaDomicilio)
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
-        }else{
-            alert("No se encontro ningun Tencinco");
-        }
+        llenarTablaIf(dataTecnico);
     } catch (error) {
         console.error('Error al cargar los Tecnicos:', error);
     }
@@ -178,66 +188,7 @@ async function getTecnicoXId() {
             throw new Error(`Error al cargar los Tecnicos: ${response.status}`);
         }
         const dataTecnico = await response.json();
-
-        const tabla = document.getElementById('tablaTecnico');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
-        tecnico = dataTecnico;
-        if (tecnico) {
-            const fila = document.createElement('tr');
-            const columnaLegajo = document.createElement('td');
-            const columnaDni = document.createElement('td');
-            const columnaApellido = document.createElement('td');
-            const columnaNombre = document.createElement('td');
-            const columnaTelefono = document.createElement('td');
-            const columnaEmail = document.createElement('td');
-            const columnaDomicilio = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaLegajo.textContent = tecnico.id;
-            columnaDni.textContent = tecnico.dni;
-            columnaApellido.textContent = tecnico.apellido;
-            columnaNombre.textContent = tecnico.nombre;
-            columnaTelefono.textContent = tecnico.telefono;
-            columnaEmail.textContent = tecnico.email;
-            columnaDomicilio.textContent = tecnico.domicilio;
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarTecnico");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarTecnicoId = tecnico.id;
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarTecnico(tecnico.id);
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-
-            fila.appendChild(columnaLegajo);
-            fila.appendChild(columnaDni)
-            fila.appendChild(columnaApellido)
-            fila.appendChild(columnaNombre);
-            fila.appendChild(columnaTelefono);
-            fila.appendChild(columnaEmail)
-            fila.appendChild(columnaDomicilio)
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
-        }else{
-            alert("No se encontro ningun Tencinco");
-        }
+        llenarTablaIf(dataTecnico);
     } catch (error) {
         console.error('Error al cargar los Tecnicos:', error);
     }
@@ -255,63 +206,7 @@ async function getTecnicoXNombre(){
         }
         const dataTecnico = await response.json();
 
-        const tabla = document.getElementById('tablaTecnico');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
-
-        dataTecnico.forEach(function (tecnico) {
-            const fila = document.createElement('tr');
-            const columnaLegajo = document.createElement('td');
-            const columnaDni = document.createElement('td');
-            const columnaApellido = document.createElement('td');
-            const columnaNombre = document.createElement('td');
-            const columnaTelefono = document.createElement('td');
-            const columnaEmail = document.createElement('td');
-            const columnaDomicilio = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaLegajo.textContent = tecnico.id;
-            columnaDni.textContent = tecnico.dni;
-            columnaApellido.textContent = tecnico.apellido;
-            columnaNombre.textContent = tecnico.nombre;
-            columnaTelefono.textContent = tecnico.telefono;
-            columnaEmail.textContent = tecnico.email;
-            columnaDomicilio.textContent = tecnico.domicilio;
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarTecnico");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarTecnicoId = tecnico.id;
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarTecnico(tecnico.id);
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-
-            fila.appendChild(columnaLegajo);
-            fila.appendChild(columnaDni)
-            fila.appendChild(columnaApellido)
-            fila.appendChild(columnaNombre);
-            fila.appendChild(columnaTelefono);
-            fila.appendChild(columnaEmail)
-            fila.appendChild(columnaDomicilio)
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
-        });
+        llenarTablaFor(dataTecnico);
     } catch (error) {
         console.error('Error al cargar los Tecnicos:', error);
     }

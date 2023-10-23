@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.ProgramacionAvanzada.AutoSA.entity.Marca;
 
 @Repository
-public interface MarcaRepository extends JpaRepository<Marca, Integer>{
+public interface MarcaRepository extends JpaRepository<Marca, Integer> {
     Optional<Marca> findByNombre(String nombre);
+    Boolean existsByNombre(String nombre);
 }
+

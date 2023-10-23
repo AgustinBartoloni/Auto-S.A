@@ -13,43 +13,37 @@
 <body class="body">
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#"><h1>Auto S.A</h1></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Orden de Trabajo
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item disabled" href="./NuevaOrden.html">Nueva Orden</a></li>
-                          <li><a class="dropdown-item" href="./BuscarOrden.html">Buscar Orden</a></li>
-                        </ul>
-                      </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./Tecnico.html">Tecnico</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="./Cliente.html">Cliente</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      ABM
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="./Servicio.html">Servicios</a></li>
-                      <li><a class="dropdown-item" href="./Vehiculo.html">Vehiculos</a></li>
-                      <li><a class="dropdown-item" href="./Marca.html">Marcas</a></li>
-                      <li><a class="dropdown-item" href="./Modelo.html">Modelos</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
+          <div class="container-fluid">
+            <a class="navbar-brand" href="./index.html"><h1>Auto S.A</h1></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Ordenes de Trabajo
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="./NuevaOrden.html">Nueva Orden</a></li>
+                    <li><a class="dropdown-item" href="./BuscarOrden.html">Administrar Orden</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Configuracion</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="./Tecnico.html">Tecnico</a></li>
+                    <li><a class="dropdown-item" href="./Servicio.html">Servicios</a></li>
+                    <li><a class="dropdown-item" href="./Cliente.html">Cliente</a></li>
+                    <li><a class="dropdown-item" href="./Vehiculo.html">Vehiculos</a></li>
+                    <li><a class="dropdown-item" href="./Modelo.html">Modelos</a></li>
+                    <li><a class="dropdown-item" href="./Marca.html">Marcas</a></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
-          </nav>
+          </div>
+        </nav>
     </header>
 
     <main class="main">
@@ -61,30 +55,66 @@
                             <h2>Nueva orden de trabajo</h2>
                         </div>
 
+                        <!-- Fecha y hora -->
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="fecha" class="form-label">Fecha</label>
+                                <input type="date" class="form-control" id="fecha" name="fecha">
+                            </div>
+                            <div class="col">
+                                <label for="hora" class="form-label">Hora</label>
+                                <input type="time" class="form-control" id="hora">
+                            </div>
+                        </div>
+
                         <!-- Cliente -->
-                        <div class="card mb-3">
+                        <div class="card mb-3" id="cliente-container">
                             <div class="card-body">
-                                <div class="mb-3">
-                                    <h5>Cliente</h5>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>Cliente</h5>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex align-items-center">
+                                            <h5 class="mr-2">Cargar Cliente</h5>
+                                            <button style="margin-left: 15px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente" onclick="llenarSelectCliente()">+</button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="dniCliente" class="form-label">DNI</label>
-                                    <input type="number" class="form-control" id="dniCliente" placeholder="documento">
+                                    <input type="number" class="form-control" id="input-ClienteDni" placeholder="documento">
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="nombreCliente" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
+                                    <input type="text" class="form-control" id="input-ClienteNombre" placeholder="nombre">
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="apellidoCliente" class="form-label">Apellido</label>
-                                    <input type="text" class="form-control" id="apellidoCliente" placeholder="apellido">
+                                    <input type="text" class="form-control" id="input-ClienteApellido" placeholder="apellido">
                                 </div>
-                                <div class="col">
-                                    <h5>Cargar Nuevo Cliente</h5>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
+  
+                                <div class="mb-3">
+                                    <label for="telefonoCliente" class="form-label">Teléfono</label>
+                                    <input type="number" class="form-control" id="input-ClienteTel" placeholder="teléfono">
+                                </div>
+  
+                                <div class="mb-3">
+                                    <label for="emailCliente" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="input-ClienteEmail" placeholder="email">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="domicilioCliente" class="form-label">Domicilio</label>
+                                    <input type="text" class="form-control" id="input-ClienteDomicilio" placeholder="domicilio">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="emailCliente" class="form-label">Adjuntar imagen de Carnet</label>
+                                    <input type="file" class="form-control" id="emailCliente" placeholder="imagen">
                                 </div>
 
                                 <!-- Modal Cliente -->
@@ -96,62 +126,47 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
+                                            <select class="form-select" id="modal-select-ClienteDni" aria-label="Default select example">
+                                                <option selected>Seleccione un DNI</option>
+                                            </select>
+            
                                             <div class="mb-3">
                                                 <label for="nombreCliente" class="form-label">Nombre</label>
-                                                <input type="text" class="form-control" id="nombreCliente" placeholder="nombre">
+                                                <input type="text" class="form-control" id="modal-input-ClienteNombre" placeholder="nombre">
                                             </div>
-              
+            
                                             <div class="mb-3">
                                                 <label for="apellidoCliente" class="form-label">Apellido</label>
-                                                <input type="text" class="form-control" id="apellidoCliente" placeholder="apellido">
+                                                <input type="text" class="form-control" id="modal-input-ClienteApellido" placeholder="apellido">
                                             </div>
-              
-                                            <div class="mb-3">
-                                                <label for="dniCliente" class="form-label">DNI</label>
-                                                <input type="number" class="form-control" id="dniCliente" placeholder="documento">
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="loadCliente()">Confirmar</button>
                                             </div>
-              
-                                            <div class="mb-3">
-                                                <label for="telefonoCliente" class="form-label">Teléfono</label>
-                                                <input type="number" class="form-control" id="telefonoCliente" placeholder="teléfono">
-                                            </div>
-              
-                                            <div class="mb-3">
-                                                <label for="emailCliente" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="emailCliente" placeholder="email">
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="emailCliente" class="form-label">Adjuntar imagen de Carnet</label>
-                                                <input type="file" class="form-control" id="emailCliente" placeholder="imagen">
-                                            </div>
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="crearMarca()">Confirmar</button>
                                         </div>
                                     </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                         <!-- Vehiculo -->
                         <div class="card mb-3">
                             <div class="card-body">
-                                <div class="mb-3">
-                                    <h5>Vehículo</h5>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>Vehiculo</h5>
+                                    </div>
+                                    <div class="col">
+                                        <div class="d-flex align-items-center">
+                                            <h5>Buscar Vehiculo</h5>
+                                            <button style="margin-left: 15px;" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalVehiculo">+</button>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="dominioVehiculo" class="form-label">Patente</label>
-                                    <input type="text" class="form-control" id="dominioVehiculo" placeholder="patente">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="dominioVehiculo" class="form-label">Kilometraje</label>
-                                    <input type="number" class="form-control" id="dominioVehiculo" placeholder="kilometraje">
+                                    <input type="text" class="form-control" id="input-VehiculoPatente" placeholder="patente">
                                 </div>
 
                                 <!-- Marca -->
@@ -163,7 +178,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-10">
-                                                    <select class="form-select" id="marcaVehiculo" aria-label="Default select example" onchange="getModelo()">
+                                                    <select class="form-select" id="select-VehiculoMarca" aria-label="Default select example" onchange="getModelo()">
                                                         <option selected>Seleccione una marca</option>
                                                     </select>
                                                 </div>
@@ -208,7 +223,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-10">                                            
-                                                <select class="form-select" id="modeloVehiculo" aria-label="Default select example" disabled>
+                                                <select class="form-select" id="select-VehiculoModelo" aria-label="Default select example" disabled>
                                                     <option selected>Seleccione un modelo</option>
                                                 </select>
                                             </div>
@@ -244,13 +259,13 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="dominioVehiculo" class="form-label">Año</label>
-                                    <input type="number" class="form-control" id="dominioVehiculo" placeholder="año">
+                                    <label for="VehiculoAño" class="form-label">Año</label>
+                                    <input type="number" class="form-control" id="input-VehiculoAño" placeholder="año">
                                 </div>
 
-                                <div class="col">
-                                    <h5>Cargar Nuevo Vehiculo</h5>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCliente">+</button>
+                                <div class="mb-3">
+                                    <label for="VehiculoKilometraje" class="form-label">Kilometraje</label>
+                                    <input type="number" class="form-control" id="input-VehiculoKilometraje" placeholder="kilometraje">
                                 </div>
                             </div>
                         </div>
@@ -262,9 +277,9 @@
                                     <div class="mb-3">
                                         <h5>Tecnico</h5>
                                     </div>
-                                    <select multiple class="form-select" id="tecnico" aria-label="Default select example">
-                                        <option selected>Seleccione un tecnico</option>
-                                    </select>
+                                    <div class="form-check" id="checkbox-Tecnico">
+                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -276,9 +291,14 @@
                                     <div class="mb-3">
                                         <h5>Servicios</h5>
                                     </div>
-                                    <select multiple class="form-select" id="tecnico" aria-label="Default select example">
+                                    <div class="form-check" id="checkbox-Servicios">
+                                        
+                                    </div>
+                                    <!--
+                                    <select class="form-select" id="select-Servicio" aria-label="Default select example">
                                         <option selected>Seleccione los Servicios</option>
                                     </select>
+                                    -->
                                 </div>
                             </div>
                         </div>
@@ -296,7 +316,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" id="btn-SetOrdenDeTrabajo">Confirmar</button>
                     </div>
                 </div>
             </form>
@@ -304,6 +326,6 @@
     </main>
    
     
-    <script src="../JS/NuevaOrden.js"></script>
+    <script src="../JS/OrdenDeTrabajo/NuevaOrden.js"></script>
 </body>
 </html>

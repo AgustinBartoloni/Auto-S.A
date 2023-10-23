@@ -1,21 +1,76 @@
 const url = "http://localhost:8080/modelo"; 
+// ----------------------------------------------------------------------------
+// formatearTexto -------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
-//Funcion para dar formato al texto
 function formatearString(textoEntrada) {
-
-    const palabras = textoEntrada.split(" "); // Divide el string en palabras
-    let resultado = ""; // Inicializa una cadena para almacenar el resultado formateado
-  
+    const palabras = textoEntrada.split(" ");// Divide el string en palabras
+    let resultado = "";// Inicializa una cadena para almacenar el resultado formateado
     // Recorre cada palabra y forma el resultado
     for (const palabra of palabras) {
       if (palabra) { // Verifica si la palabra no está en blanco
-        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase(); // Convierte la primera letra en mayúscula y el resto en minúscula
-        resultado += palabraFormateada + " ";
+        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();// Convierte la primera letra en mayúscula y el resto en minúscula
+        resultado += palabraFormateada + " "; //concatena
       }
     }
-  
-    return resultado.trim(); // Elimina el espacio en blanco adicional al final y retorna el resultado formateado
+    return resultado.trim();// Elimina el espacio en blanco adicional al final y retorna el resultado formateado
 }
+
+// ----------------------------------------------------------------------------
+// Llenar Tablas con for ------------------------------------------------------
+// ----------------------------------------------------------------------------
+async function llenarTablaFor(data){
+
+    const tabla = document.getElementById('tablaModelo');
+    const tbody = tabla.querySelector('tbody');
+    tbody.innerHTML = '';
+
+    data.forEach(function (modelo) {
+        const fila = document.createElement('tr');
+        const columnaId = document.createElement('td');
+        const columnaNombre = document.createElement('td');
+        const columnaMarca = document.createElement('td');
+        const columnaOpciones = document.createElement('td');
+
+        columnaId.textContent = modelo.id;
+        columnaNombre.textContent = modelo.nombre;
+        columnaMarca.textContent = modelo.marca.nombre;
+
+        // Boton Editar
+
+        const botonModificar = document.createElement('button');
+        botonModificar.textContent = 'Editar';
+        botonModificar.classList= 'btn btn-primary';
+        botonModificar.style = "margin: 0px 5px;"
+        botonModificar.setAttribute("data-bs-target", "#modalEditarModelo");
+        botonModificar.setAttribute("data-bs-toggle", "modal");
+        botonModificar.addEventListener('click', function () {
+            editarModeloId = modelo.id;
+            llenarSelectEditarModelo();
+        });
+
+        //Boton Eliminar
+
+        const botonEliminar = document.createElement('button');
+        botonEliminar.textContent = 'Eliminar';
+        botonEliminar.classList= 'btn btn-primary';
+        botonEliminar.style = "margin: 0px 5px;"
+        botonEliminar.addEventListener('click', function () {
+            eliminarModelo(modelo.id);
+        });
+
+        columnaOpciones.appendChild(botonModificar);
+        columnaOpciones.appendChild(botonEliminar);
+
+        fila.appendChild(columnaId);
+        fila.appendChild(columnaNombre);
+        fila.appendChild(columnaMarca);
+        fila.appendChild(columnaOpciones);
+
+        tbody.appendChild(fila);
+    });
+}
+
 
 // ----------------------------------------------------------------------------
 // Cargar Tablas --------------------------------------------------------------
@@ -26,60 +81,14 @@ var editarModeloId;
 
 async function getModelos() {
     try {
-        const response = await fetch(url+'/list');
+        const response = await fetch(url+'/list'); //Hace consulta para traer todos los modelos
         if (!response.ok) {
             throw new Error(`Error al cargar las marcas: ${response.status}`);
         }
-        const dataModelos = await response.json();
-
-        const tabla = document.getElementById('tablaModelo');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
-
-        dataModelos.forEach(function (modelo) {
-            const fila = document.createElement('tr');
-            const columnaId = document.createElement('td');
-            const columnaNombre = document.createElement('td');
-            const columnaMarca = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaId.textContent = modelo.id;
-            columnaNombre.textContent = modelo.nombre;
-            columnaMarca.textContent = modelo.marca.nombre;
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarModelo");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarModeloId = modelo.id;
-                llenarSelectEditarModelo();
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarModelo(modelo.id);
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-
-            fila.appendChild(columnaId);
-            fila.appendChild(columnaNombre);
-            fila.appendChild(columnaMarca);
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
-        });
-    } catch (error) {
-        console.error('Error al cargar las marcas:', error);
+        const dataModelos = await response.json(); //Obtiene la respuesta y la almacena en una variable
+        llenarTablaFor(dataModelos); //Llama a la funcion para llenar la tabla
+    } catch (error) { //Captura y muestra error por consola
+        console.error('Error al cargar las marcas:', error); 
     }
 }
 
@@ -93,64 +102,20 @@ async function getModelosXMarca() {
         }
         const dataModelos = await response.json();
 
-        const tabla = document.getElementById('tablaModelo');
-        const tbody = tabla.querySelector('tbody');
-        tbody.innerHTML = '';
+        llenarTablaFor(dataModelos); //llama a la funcion para llenar la tabla 
 
-        dataModelos.forEach(function (modelo) {
-            const fila = document.createElement('tr');
-            const columnaId = document.createElement('td');
-            const columnaNombre = document.createElement('td');
-            const columnaMarca = document.createElement('td');
-            const columnaOpciones = document.createElement('td');
-
-            columnaId.textContent = modelo.id;
-            columnaNombre.textContent = modelo.nombre;
-            columnaMarca.textContent = modelo.marca.nombre;
-
-            // Botones de modificar y eliminar
-
-            const botonModificar = document.createElement('button');
-            botonModificar.textContent = 'Modificar';
-            botonModificar.classList= 'btn btn-primary';
-            botonModificar.style = "margin: 0px 5px;"
-            botonModificar.setAttribute("data-bs-target", "#modalEditarModelo");
-            botonModificar.setAttribute("data-bs-toggle", "modal");
-            botonModificar.addEventListener('click', function () {
-                editarModeloId = modelo.id;
-                llenarSelectEditarModelo();
-            });
-
-            const botonEliminar = document.createElement('button');
-            botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
-            botonEliminar.style = "margin: 0px 5px;"
-            botonEliminar.addEventListener('click', function () {
-                eliminarModelo(modelo.id);
-            });
-
-            columnaOpciones.appendChild(botonModificar);
-            columnaOpciones.appendChild(botonEliminar);
-
-            fila.appendChild(columnaId);
-            fila.appendChild(columnaNombre);
-            fila.appendChild(columnaMarca);
-            fila.appendChild(columnaOpciones);
-
-            tbody.appendChild(fila);
-        });
     } catch (error) {
         console.error('Error al cargar las marcas:', error);
     }
 }
 
-//Leer opcion de filtrado y buscar -------------------------------------
+//Leer opcion de filtrado y buscar -----------------------------------------------
 
 const btnBuscar = document.getElementById("btn-buscar");  //Contiene el boton buscar
 const selectFiltrar = document.getElementById("selectFiltrar"); //contiene el select de filtrar
 const selectTablaMarca = document.getElementById("select-TablaMarca"); //Contiene el select arriba de la tabla
 
-//Carga el select si se selecciono un filtrado
+//Carga el select si se selecciono un filtrado -----
 selectFiltrar.addEventListener("change", async () => {
 
     if (selectFiltrar.value === "1") {
