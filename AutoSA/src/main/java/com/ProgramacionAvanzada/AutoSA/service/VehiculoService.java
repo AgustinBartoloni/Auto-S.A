@@ -37,11 +37,6 @@ public class VehiculoService {
         vehiculoRepository.deleteById(id);
     }
 
-    //Se fija si ya existe un vehiculo segun su id
-    public boolean existsById(int id) {
-        return vehiculoRepository.existsById(id);
-    }
-
     //Devuelve un vehiculo segun el Id que conisidan con el ingresado por el parametro
     public Optional<Vehiculo> findById(int id){
         return vehiculoRepository.findById(id);
@@ -64,5 +59,14 @@ public class VehiculoService {
 
     public List<Vehiculo> findByCliente(Cliente cliente){
         return vehiculoRepository.findByCliente(cliente);
+    }
+
+    //Se fija si ya existe un vehiculo segun su id
+    public boolean existsById(int id) {
+        return vehiculoRepository.existsById(id);
+    }
+
+    public boolean existsByPatente(String patente){
+        return vehiculoRepository.existsByPatente(patente);
     }
 }

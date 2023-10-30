@@ -50,7 +50,13 @@ public class VehiculoController {
     //Este método tiene como parámetro un objeto VehiculoDto que se obtiene del cuerpo de la solicitud HTTP. La anotación @RequestBody indica que el objeto vehiculoDto se debe deserializar automáticamente a partir de los datos JSON enviados en el cuerpo de la solicitud.
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody VehiculoDto vehiculoDto){
-        try {
+        String patenteVehiculoNuevo = vehiculoDto.getPatente();
+        if(vehiculoDto.getPatente().isBlank() ||
+        vehiculoService.existsByPatente(patenteVehiculoNuevo)
+        ){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else{
+            try {
             //Se crea una variable clienteId que alamacena el id del cliente, este se obtiene a traves del parametro vehiculoDto, que a su ves tiene un objeto cliente con el metodo getId
             int clienteId = vehiculoDto.getCliente().getId();
             //Se crea un objeto de cliente llamado clieVehiculo con los datos del cliente obtenidos por el metodo findById(clienteId).get() de la clase clienteService
@@ -70,10 +76,12 @@ public class VehiculoController {
             }
             //Si todo se ejecuta correctamente, se devuelve una respuesta HTTP con el estado 200 OK 
             return new ResponseEntity<>(HttpStatus.OK);
-        //Si ocurre alguna excepción durante el proceso, se captura la excepción en el bloque catch, y se devuelve una respuesta HTTP con el estado 400 Bad Request
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            //Si ocurre alguna excepción durante el proceso, se captura la excepción en el bloque catch, y se devuelve una respuesta HTTP con el estado 400 Bad Request
+            } catch (Exception e) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
+        
     }
 
     // se utiliza para indicar que este método maneja solicitudes HTTP PUT a la ruta "/update/{id}". 

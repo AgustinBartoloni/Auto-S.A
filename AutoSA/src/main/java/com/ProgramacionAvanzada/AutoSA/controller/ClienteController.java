@@ -37,8 +37,16 @@ public class ClienteController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ClienteDto clienteDto){
-        
-        try {
+        String dniClienteNuevo = clienteDto.getDni();
+        if(clienteDto.getNombre().isBlank() ||
+        clienteDto.getApellido().isBlank() ||
+        clienteDto.getDomicilio().isBlank() ||
+        clienteDto.getDni().isBlank() ||
+        clienteService.existsByDni(dniClienteNuevo)){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            
+        }else{
+
             Cliente clienteNuevo = new Cliente(
             clienteDto.getNombre(),
             clienteDto.getApellido(),
@@ -50,15 +58,12 @@ public class ClienteController {
             );
 
             clienteService.save(clienteNuevo);
-            return new ResponseEntity<>(HttpStatus.OK);
-
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }   
+            return new ResponseEntity<>(HttpStatus.OK);   
+        }
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody ClienteDto clienteDto){
-        
         if(!clienteService.existsById(id)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

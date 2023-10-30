@@ -37,28 +37,34 @@ public class TecnicoController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody TecnicoDto tecnicoDto){
+        String dniTecnicoNuevo = tecnicoDto.getDni();
+        if(tecnicoDto.getNombre().isBlank() ||
+        tecnicoDto.getApellido().isBlank() ||
+        tecnicoDto.getDomicilio().isBlank() ||
+        tecnicoDto.getDni().isBlank() ||
+        tecnicoService.existsByDni(dniTecnicoNuevo)
+        ){
 
-        if(tecnicoDto.getNombre().isBlank()){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+            
+        }else{
 
-        Tecnico tecnicoNuevo = new Tecnico(
+            Tecnico tecnicoNuevo = new Tecnico(
             tecnicoDto.getNombre(),
             tecnicoDto.getApellido(),
             tecnicoDto.getDni(),
             tecnicoDto.getTelefono(),
             tecnicoDto.getEmail(),
             tecnicoDto.getDomicilio()
-        );
+            );
 
-        tecnicoService.save(tecnicoNuevo);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+            tecnicoService.save(tecnicoNuevo);
+            return new ResponseEntity<>(HttpStatus.OK);   
+        }
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody TecnicoDto tecnicoDto){
-        
         if(!tecnicoService.existsById(id)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

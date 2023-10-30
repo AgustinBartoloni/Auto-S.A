@@ -38,3 +38,11 @@
     border-radius: 15px;
 }
 
+#checkbox-Tecnico{
+    max-height: 150px; 
+    overflow-y: auto;
+}
+#checkbox-Servicios{
+    max-height: 150px; 
+    overflow-y: auto;
+}

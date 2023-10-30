@@ -14,4 +14,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
     Optional<Cliente> findById(int id);
     List<Cliente> findByNombre(String nombre);
     List<Cliente> findByFecha(LocalDate fecha);
+    Boolean existsByDni(String dni);
 }

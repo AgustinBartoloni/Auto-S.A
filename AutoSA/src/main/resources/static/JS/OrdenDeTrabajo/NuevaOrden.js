@@ -13,6 +13,8 @@ const inputClienteApellido = document.getElementById("input-ClienteApellido");
 const inputClienteTel = document.getElementById("input-ClienteTel");
 const inputClienteEmail = document.getElementById("input-ClienteEmail");
 const inputClienteDomicilio = document.getElementById("input-ClienteDomicilio");
+//Campos modal Vehiculo
+
 //Cmapos Vehiculo
 const inptuVehiculoPatente = document.getElementById("input-VehiculoPatente");
 const selectVehiculoMarca = document.getElementById("select-VehiculoMarca");
@@ -25,9 +27,6 @@ const checkboxServicio = document.getElementById("checkbox-Servicios");
 const checkboxTecnico = document.getElementById("checkbox-Tecnico");
 //Boton para guaradar
 const btnSetOrden = document.getElementById("btn-SetOrdenDeTrabajo");
-//Variable de cargas
-var cargaCliente = "0";
-var cargaVehiculo = "0";
 // -----------------------------------------------------------------------------
 //Carga la fecha automaticamente -----------------------------------------------
 // -----------------------------------------------------------------------------
@@ -266,6 +265,7 @@ document.addEventListener("DOMContentLoaded", async function(){
 // ---------------------------------------------------------------------------
 //Guaradar Orden de trabajo --------------------------------------------------
 // ---------------------------------------------------------------------------
+//Set cliente ---------------------------------------------------------------
 async function setCliente() {
     var nombreNuevoCliente = inputClienteNombre.value;
     nombreNuevoCliente = formatearString(nombreNuevoCliente);
@@ -317,10 +317,11 @@ async function setCliente() {
     }
 }
 
-//Set vehiculo
+//Set vehiculo ---------------------------------------------------------------
 
 async function setVehiculo(){
     const dniCliente = inputClienteDni.value; 
+    var idclienteVehiculoNuevo;
     try {
         const response = await fetch(`http://localhost:8080/cliente/listByDni/${dniCliente}`)
         if (!response.ok) { //Si la peticion tubo un error entonces
@@ -328,7 +329,7 @@ async function setVehiculo(){
         }
         const dataCargarCliente = await response.json();
 
-        var idClienteNuevo = dataCargarCliente.id;
+        idclienteVehiculoNuevo = dataCargarCliente.id;
 
     } catch (error) {
         
@@ -336,7 +337,7 @@ async function setVehiculo(){
     const pate = inptuVehiculoPatente.value;
     const patente = formatearString(pate);
     const modelo = selectVehiculoModelo.value;
-    const cliente = idClienteNuevo; 
+    const cliente = idclienteVehiculoNuevo; 
     const año = inputVehiculoAño.value;
     const kilometraje = inputVehiculoKilometraje.value;
 
@@ -378,14 +379,5 @@ async function setVehiculo(){
 }
 
 btnSetOrden.addEventListener("click", async function () {
-    if(cargaCliente === "0" && cargaVehiculo === "0"){
-        alert("Crea las dos cosas");
-        await setCliente();
-        await setVehiculo();
-    }else if(cargaVehiculo === "0" && cargaCliente === "1"){
-        await setVehiculo();
-        alert("Setear lo demas")
-    }else if(cargaCliente === "0" && cargaVehiculo ==="1"){
-        await setCliente();
-    }
+    
 });

@@ -43,4 +43,8 @@ public class TecnicoService {
     public boolean existsById(int id){
         return tecnicoRepository.existsById(id);
     }
+
+    public boolean existsByDni(String dni){
+        return tecnicoRepository.existsByDni(dni);
+    }
 }
