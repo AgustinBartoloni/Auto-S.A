@@ -28,24 +28,18 @@ export function formatearString(textoEntrada) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 
-function setCliente(){
-    var nombreNuevoCliente = document.getElementById("nombreNuevoCliente").value;
-    var apellidoNuevoCliente = document.getElementById("apellidoNuevoCliente").value;
-    var dniNuevoCliente = document.getElementById("dniNuevoCliente").value;
-    var telefonoNuevoCliente = document.getElementById("telefonoNuevoCliente").value;
-    var emailNuevoCliente = document.getElementById("emailNuevoCliente").value;
-    var domicilioNuevoCliente = document.getElementById("domicilioNuevoCliente").value
+async function setCliente(nombre, apellido, dni, telefono, email, domicilio){
 
-    if(!nombreNuevoCliente.trim() || !apellidoNuevoCliente.trim() || !dniNuevoCliente.trim() || !telefonoNuevoCliente.trim() || !emailNuevoCliente.trim() || !domicilioNuevoCliente.trim()){
+    if(!nombre.trim() || !apellido.trim() || !dni.trim() || !telefono.trim() || !email.trim() || !domicilio.trim()){
         alert("Ningun campo puede estar vacio");
     }else{
         var nuevoClienteData = {
-            nombre: formatearString(nombreNuevoCliente),
-            apellido : formatearString(apellidoNuevoCliente),
-            dni : dniNuevoCliente,
-            telefono : telefonoNuevoCliente,
-            email : emailNuevoCliente,
-            domicilio : formatearString(domicilioNuevoCliente),
+            nombre: formatearString(nombre),
+            apellido : formatearString(apellido),
+            dni : dni,
+            telefono : telefono,
+            email : email,
+            domicilio : formatearString(domicilio),
         }
         
         fetch(url + "/create", {
@@ -73,6 +67,18 @@ function setCliente(){
 }
 
 
-btnAgregarCliente.addEventListener("click", function(){
-    setCliente();
-})
+btnAgregarCliente.addEventListener("click",async function(){
+    var nombreNuevoCliente = document.getElementById("nombreNuevoCliente").value;
+    var apellidoNuevoCliente = document.getElementById("apellidoNuevoCliente").value;
+    var dniNuevoCliente = document.getElementById("dniNuevoCliente").value;
+    var telefonoNuevoCliente = document.getElementById("telefonoNuevoCliente").value;
+    var emailNuevoCliente = document.getElementById("emailNuevoCliente").value;
+    var domicilioNuevoCliente = document.getElementById("domicilioNuevoCliente").value
+    await setCliente(
+        nombreNuevoCliente,
+        apellidoNuevoCliente,
+        dniNuevoCliente,
+        telefonoNuevoCliente,
+        emailNuevoCliente,
+        domicilioNuevoCliente);
+});

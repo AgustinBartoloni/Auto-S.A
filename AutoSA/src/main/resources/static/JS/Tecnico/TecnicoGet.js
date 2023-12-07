@@ -46,7 +46,7 @@ async function llenarTablaFor(data){
 
             const botonModificar = document.createElement('button');
             botonModificar.textContent = 'Editar';
-            botonModificar.classList= 'btn btn-primary';
+            botonModificar.classList= 'btn btn-outline-primary';
             botonModificar.style = "margin: 0px 5px;"
             botonModificar.setAttribute("data-bs-target", "#modalEditarTecnico");
             botonModificar.setAttribute("data-bs-toggle", "modal");
@@ -59,7 +59,7 @@ async function llenarTablaFor(data){
 
             const botonEliminar = document.createElement('button');
             botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
+            botonEliminar.classList= 'btn btn-outline-danger';
             botonEliminar.style = "margin: 0px 5px;"
             botonEliminar.addEventListener('click', function () {
                 deleteTecnico(tecnico.id);
@@ -111,7 +111,7 @@ async function llenarTablaIf(data){
 
             const botonModificar = document.createElement('button');
             botonModificar.textContent = 'Editar';
-            botonModificar.classList= 'btn btn-primary';
+            botonModificar.classList= 'btn btn-outline-primary';
             botonModificar.style = "margin: 0px 5px;"
             botonModificar.setAttribute("data-bs-target", "#modalEditarTecnico");
             botonModificar.setAttribute("data-bs-toggle", "modal");
@@ -124,7 +124,7 @@ async function llenarTablaIf(data){
 
             const botonEliminar = document.createElement('button');
             botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
+            botonEliminar.classList= 'btn btn-outline-danger';
             botonEliminar.style = "margin: 0px 5px;"
             botonEliminar.addEventListener('click', function () {
                 deleteTecnico(tecnico.id);

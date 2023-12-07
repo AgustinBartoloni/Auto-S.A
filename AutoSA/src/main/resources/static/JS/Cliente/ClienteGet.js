@@ -35,11 +35,21 @@ async function llenarTablaFor(dataCliente){
         columnaEmail.textContent = cliente.email;
         columnaDomicilio.textContent = cliente.domicilio;
 
-        // Botones de modificar y eliminar
+        // Botones de ver,  modificar y eliminar
+
+        const botonVer = document.createElement('button');
+        botonVer.textContent = 'Ver';
+        botonVer.classList= 'btn btn-outline-success';
+        botonVer.style = "margin: 0px 5px;"
+        botonVer.setAttribute("data-bs-target", "#modalVerCliente");
+        botonVer.setAttribute("data-bs-toggle", "modal");
+        botonVer.addEventListener('click', function () {
+            editarTecnicoId = tecnico.id;
+        });
 
         const botonModificar = document.createElement('button');
         botonModificar.textContent = 'Editar';
-        botonModificar.classList= 'btn btn-primary';
+        botonModificar.classList= 'btn btn-outline-primary';
         botonModificar.style = "margin: 0px 5px;"
         botonModificar.setAttribute("data-bs-target", "#modalEditarCliente");
         botonModificar.setAttribute("data-bs-toggle", "modal");
@@ -52,25 +62,15 @@ async function llenarTablaFor(dataCliente){
 
         const botonEliminar = document.createElement('button');
         botonEliminar.textContent = 'Eliminar';
-        botonEliminar.classList= 'btn btn-primary';
+        botonEliminar.classList= 'btn btn-outline-danger';
         botonEliminar.style = "margin: 0px 5px;"
         botonEliminar.addEventListener('click',async function () {
             await deleteCliente(cliente.id);
         });
 
-        const botonVer = document.createElement('button');
-        botonVer.textContent = 'Ver';
-        botonVer.classList= 'btn btn-primary';
-        botonVer.style = "margin: 0px 5px;"
-        botonVer.setAttribute("data-bs-target", "#modalVerCliente");
-        botonVer.setAttribute("data-bs-toggle", "modal");
-        botonVer.addEventListener('click', function () {
-            editarTecnicoId = tecnico.id;
-        });
-
+        columnaOpciones.appendChild(botonVer);
         columnaOpciones.appendChild(botonModificar);
         columnaOpciones.appendChild(botonEliminar);
-        columnaOpciones.appendChild(botonVer);
 
         fila.appendChild(columnaId);
         fila.appendChild(columnaDni)
@@ -119,7 +119,7 @@ async function llenarTablaIf(dataCliente){
 
         const botonModificar = document.createElement('button');
         botonModificar.textContent = 'Editar';
-        botonModificar.classList= 'btn btn-primary';
+        botonModificar.classList= 'btn btn-outline-primary';
         botonModificar.style = "margin: 0px 5px;"
         botonModificar.setAttribute("data-bs-target", "#modalEditarCliente");
         botonModificar.setAttribute("data-bs-toggle", "modal");
@@ -132,7 +132,7 @@ async function llenarTablaIf(dataCliente){
 
         const botonEliminar = document.createElement('button');
         botonEliminar.textContent = 'Eliminar';
-        botonEliminar.classList= 'btn btn-primary';
+        botonEliminar.classList= 'btn btn-outline-danger';
         botonEliminar.style = "margin: 0px 5px;"
         botonEliminar.addEventListener('click', function () {
             eliminarCliente(cliente.id);
@@ -140,7 +140,7 @@ async function llenarTablaIf(dataCliente){
 
         const botonVer = document.createElement('button');
         botonVer.textContent = 'Ver';
-        botonVer.classList= 'btn btn-primary';
+        botonVer.classList= 'btn btn-outline-success';
         botonVer.style = "margin: 0px 5px;"
         botonVer.setAttribute("data-bs-target", "#modalVerCliente");
         botonVer.setAttribute("data-bs-toggle", "modal");
@@ -148,9 +148,9 @@ async function llenarTablaIf(dataCliente){
             editarTecnicoId = tecnico.id;
         });
 
+        columnaOpciones.appendChild(botonVer);
         columnaOpciones.appendChild(botonModificar);
         columnaOpciones.appendChild(botonEliminar);
-        columnaOpciones.appendChild(botonVer);
 
         fila.appendChild(columnaId);
         fila.appendChild(columnaDni)
@@ -229,7 +229,6 @@ async function getClienteXId() {
 
 async function getClienteXNombre() {
     const nombreConsulta = inputTablaCliente.value;
-    alert("getClienteXNombre, "+ formatearString(nombreConsulta));
     try {
         const response = await fetch(url+`/listByNombre/${ formatearString(nombreConsulta)}`);
         if (!response.ok) {

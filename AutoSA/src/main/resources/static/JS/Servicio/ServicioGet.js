@@ -45,7 +45,7 @@ export async function getServicios() {
 
             const botonModificar = document.createElement('button');
             botonModificar.textContent = 'Editar';
-            botonModificar.classList= 'btn btn-primary';
+            botonModificar.classList= 'btn btn-outline-primary';
             botonModificar.style = "margin: 0px 5px;"
             botonModificar.setAttribute("data-bs-target", "#modalEditarServicio");
             botonModificar.setAttribute("data-bs-toggle", "modal");
@@ -58,7 +58,7 @@ export async function getServicios() {
 
             const botonEliminar = document.createElement('button');
             botonEliminar.textContent = 'Eliminar';
-            botonEliminar.classList= 'btn btn-primary';
+            botonEliminar.classList= 'btn btn-outline-danger';
             botonEliminar.style = "margin: 0px 5px;"
             botonEliminar.addEventListener('click',async function () {
                 await deleteServicio(servicio.id);

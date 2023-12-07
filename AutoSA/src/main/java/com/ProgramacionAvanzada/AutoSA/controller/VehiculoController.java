@@ -139,8 +139,7 @@ public class VehiculoController {
     @GetMapping("/listByClienteId/{id}")
     public ResponseEntity<List<Vehiculo>> findByClienteId(@PathVariable("id") int id){
         try {
-            Cliente cliente = clienteService.findById(id).get();
-            List<Vehiculo> list = vehiculoService.findByCliente(cliente);
+            List<Vehiculo> list = vehiculoService.findByClienteId(id);
             //Finalmente, se devuelve una respuesta HTTP con el estado 200 OK (HttpStatus.OK) que incluye la lista de vehículos en formato JSON en el cuerpo de la respuesta.
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {

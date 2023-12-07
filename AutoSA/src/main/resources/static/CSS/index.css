@@ -46,3 +46,7 @@
     max-height: 150px; 
     overflow-y: auto;
 }
+
+#btn-ModalCliente{
+    margin-left: 15px;
+}

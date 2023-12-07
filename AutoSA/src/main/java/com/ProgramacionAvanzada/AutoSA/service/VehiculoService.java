@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ProgramacionAvanzada.AutoSA.entity.Cliente;
 import com.ProgramacionAvanzada.AutoSA.entity.Vehiculo;
 import com.ProgramacionAvanzada.AutoSA.repository.VehiculoRepository;
 
@@ -56,11 +55,11 @@ public class VehiculoService {
     //public List<Vehiculo> findByMarcaNombre(String nombre) {
     //    return vehiculoRepository.findByMarcaNombre(nombre);
     //}
-
+/*
     public List<Vehiculo> findByCliente(Cliente cliente){
         return vehiculoRepository.findByCliente(cliente);
     }
-
+*/
     //Se fija si ya existe un vehiculo segun su id
     public boolean existsById(int id) {
         return vehiculoRepository.existsById(id);
