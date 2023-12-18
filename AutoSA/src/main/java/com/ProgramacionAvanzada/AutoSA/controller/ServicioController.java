@@ -43,7 +43,8 @@ public class ServicioController {
 
         Servicio servicioNuevo = new Servicio(
             servicioDto.getNombre(),
-            servicioDto.getDescripcion()
+            servicioDto.getDescripcion(),
+            servicioDto.getPrecio()
         );
 
         servicioService.save(servicioNuevo);
@@ -53,15 +54,16 @@ public class ServicioController {
 
    @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody ServicioDto servicioDto){
-        String nombreServicioEditar = servicioDto.getNombre();
+       /* String nombreServicioEditar = servicioDto.getNombre();
         if(!servicioService.existsById(id) || servicioService.existsByNombre(nombreServicioEditar)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        }*/
 
         Servicio servicio = servicioService.findById(id).get();
 
         servicio.setNombre(servicioDto.getNombre());
         servicio.setDescripcion(servicioDto.getDescripcion());
+        servicio.setPrecio(servicioDto.getPrecio());
 
         servicioService.save(servicio);
 

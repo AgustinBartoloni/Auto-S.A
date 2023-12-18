@@ -23,12 +23,14 @@ public class Marca {
     private int id;
     
     private String nombre;
+    private int impuesto;
 
     //@OneToMany(mappedBy = "marca")
     //@JsonBackReference
     //private List<Modelo> modelo;
 
-    public Marca(String nombre){
+    public Marca(String nombre, int impuesto){
         this.nombre = nombre;
+        this.impuesto = impuesto;
     }
 }
