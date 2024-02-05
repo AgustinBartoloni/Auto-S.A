@@ -1,14 +1,16 @@
-import { formatearString } from "./OrdenCliente.js";
-import { llenarSelectMarca} from "./OrdenVehiculo.js";
+// ---------------------------------------------------------------------------------------------------------------------
+// Variables -------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
+import { formatearString } from "../Cliente/SetCliente.js"; 
+import { llenarSelectMarca } from "./SetVehiculo.js";
 const urlMarca = 'http://localhost:8080/marca';
 const urlModelo = 'http://localhost:8080/modelo';
 const btnSetMarca = document.getElementById("btn-setMarca");
 const btnSetModelo = document.getElementById("btn-AgregarModelo");
 const selectMarca = document.getElementById("select-AgregarMarca");
 const btnModalAgregarModelo = document.getElementById("btn-modalAgregarModelo");
-
 // ---------------------------------------------------------------------------------------------------------------------
-// Set marca -------------------------------------------------------------------------------------------------------------
+// Set marca -----------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------------
 
 async function setMarca(){

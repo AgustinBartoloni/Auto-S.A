@@ -150,7 +150,7 @@ export async function deleteVehiculo(id){
         if (response.ok) {
             getVehiculos();
         } else {
-            alert("Hubo un error al eliminar la marca");
+            alert("No es posible eliminar el vehiculo, ya que forma parte de una Orden de trabajo");
         }
     })
     .catch(function(error) {

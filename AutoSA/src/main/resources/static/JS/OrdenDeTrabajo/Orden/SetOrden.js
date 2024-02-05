@@ -1,21 +1,28 @@
-//----------------------------------------------------------------------------------------------------------------------
-// Variables ------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------
-const urlOrden = "http://localhost:8080/ordenDeTrabajo";
-import { verificarCliente } from "./OrdenCliente.js";
-import { verificarVehiculo } from "./OrdenVehiculo.js";
-import { setPersonalTrabajo } from "./OrdenTecnico.js";
-import { setDetalleOrden } from "./OrdenServicio.js";
+// -------------------------------------------------------------------------------------------------------------------
+// Variales  ---------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------
+// URL -----------
+const urlOrden = "http://localhost:8080/ordenDeTrabajo"
+//--------------
+import { verificarCliente } from "../Cliente/SetCliente.js";
+import { verificarVehiculo } from "../Vehiculo/SetVehiculo.js";
+import { setPersonalTrabajo } from "../Tecnico/GetTecnicos.js";
+import { setDetalleOrden } from "../Servicio/GetServicios.js";
+import { setFactura } from "../Factura/SetFactura.js";
+//fecha y hora
+const inputHora = document.getElementById("hora");
 const inputFecha = document.getElementById("fecha");
 let fechaActual;
 let horaActual;
-const inputHora = document.getElementById("hora");
+//campos
 const texTareaObservacion = document.getElementById("textarea-observacion");
+//botones
 const btnSetOrden = document.getElementById("btn-SetOrdenDeTrabajo");
+//----------------------------------------------------------------------------------------------------------------------
+// Funciones -----------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
 
-//----------------------------------------------------------------------------------------------------------------------
 // Set fecha y hora ----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function(){
     const CargarFecha = new Date();
     // Formatea la fecha actual en el formato YYYY-MM-DD para el elemento input tipo date
@@ -33,26 +40,7 @@ document.addEventListener("DOMContentLoaded", function(){
     inputHora.value = horaActual; // Establece el valor del input con la hora actual
 });
 
-//----------------------------------------------------------------------------------------------------------------------
-// Formatear texto -----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------
-
-function formatearString(textoEntrada) {
-    const palabras = textoEntrada.split(" ");// Divide el string en palabras
-    let resultado = "";// Inicializa una cadena para almacenar el resultado formateado
-    // Recorre cada palabra y forma el resultado
-    for (const palabra of palabras) {
-        if (palabra) { // Verifica si la palabra no está en blanco
-        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase();// Convierte la primera letra en mayúscula y el resto en minúscula
-        resultado += palabraFormateada + " "; //concatenar
-        }
-    }
-    return resultado.trim();// Elimina el espacio en blanco adicional al final y retorna el resultado formateado
-    }
-
-//----------------------------------------------------------------------------------------------------------------------
-// boton Confirmar -----------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------
+// boton confirmar ----------------------------------------------------------------------------------------------------
 
 btnSetOrden.addEventListener("click", async function(){
     const idClienteCargar = await verificarCliente();
@@ -63,12 +51,12 @@ btnSetOrden.addEventListener("click", async function(){
     console.log("La ultima orden tiene id " + ultimaordenId);
     setPersonalTrabajo(ultimaordenId);
     setDetalleOrden(ultimaordenId);
-    window.location.href = "./BuscarOrden.html";
-});
+    setFactura(inputFecha.value, inputHora.value, ultimaordenId);
+    //window.location.href = "../HTML/BuscarOrden.html";
+})
 
-//----------------------------------------------------------------------------------------------------------------------
 // Set Orden de Trabajo ------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------
+
 
 async function setOrdenTrabajo(vehiculoCargar){
     const descripcion = texTareaObservacion.value;

@@ -1,7 +1,7 @@
 // -------------------------------------------------------------------------------------------------------------------
 // Variales  ---------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
-const url = 'http://localhost:8080/tecnico';
+const urlTecnico = 'http://localhost:8080/tecnico';
 const urlPersonal = "http://localhost:8080/personalDeTrabajo";
 //Variables para buscar tecnico
 const btnBuscarTecnico = document.getElementById("btn-BuscarTecnico");
@@ -13,25 +13,7 @@ const tbodyBuscar = tablaBuscarTecnico.querySelector('tbody');
 const tablaCargaTecnico = document.getElementById("tablaTecnico");
 const tbodyCargar = tablaCargaTecnico.querySelector('tbody');
 const listaTecnicos = [];
-// -------------------------------------------------------------------------------------------------------------------
-// Da formto al string -----------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------------------------
-export function formatearString(textoEntrada) {
-
-    const palabras = textoEntrada.split(" "); // Divide el string en palabras
-    let resultado = ""; // Inicializa una cadena para almacenar el resultado formateado
-  
-    // Recorre cada palabra y forma el resultado
-    for (const palabra of palabras) {
-      if (palabra) { // Verifica si la palabra no está en blanco
-        const palabraFormateada = palabra.charAt(0).toUpperCase() + palabra.slice(1).toLowerCase(); // Convierte la primera letra en mayúscula y el resto en minúscula
-        resultado += palabraFormateada + " ";
-      }
-    }
-  
-    return resultado.trim(); // Elimina el espacio en blanco adicional al final y retorna el resultado formateado
-}
-
+import { formatearString } from "../Cliente/SetCliente.js";
 // -------------------------------------------------------------------------------------------------------------------
 // Cargar Tablas -----------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------------
@@ -125,7 +107,7 @@ function cargarTecnico(tecnico){
 // -------------------------------------------------------------------------------------------------------------------
 async function getTecnico(){
     try {
-        const response = await fetch(url+'/list');
+        const response = await fetch(urlTecnico+'/list');
         if (!response.ok) {
             throw new Error(`Error al cargar los Tecnico: ${response.status}`);
         }
@@ -144,7 +126,7 @@ async function getTecnico(){
 async function getTecnicoXlegajo(){
     const idTecnico = inputBuscarTecnico.value;
     try {
-        const response = await fetch(url+`/listById/${idTecnico}`);
+        const response = await fetch(urlTecnico+`/listById/${idTecnico}`);
         if (!response.ok) {
             throw new Error(`Error al cargar los Clientes: ${response.status}`);
         }
@@ -163,7 +145,7 @@ async function getTecnicoXlegajo(){
 async function getTecnicoXNombre(){
     const nombreConsulta = inputBuscarTecnico.value;
     try {
-        const response = await fetch(url+`/listByNombre/${ formatearString(nombreConsulta)}`);
+        const response = await fetch(urlTecnico+`/listByNombre/${ formatearString(nombreConsulta)}`);
         if (!response.ok) {
             throw new Error(`Error al cargar los Tecnicos: ${response.status}`);
         }

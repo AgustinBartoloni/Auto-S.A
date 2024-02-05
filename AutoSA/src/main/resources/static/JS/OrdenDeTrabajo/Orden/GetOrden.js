@@ -1,10 +1,11 @@
-const btnBuscarOrden = document.getElementById("btn-buscarOrden");
-const inputBuscarOrden = document.getElementById("input-BuscarOrden");
-const selectFiltrarBusqueda = document.getElementById("select-FiltrarBusqueda");
+//const btnBuscarOrdenTrabajo = document.getElementById("btn-BuscarOrdenTrabajo");
+//const inputBuscarOrden = document.getElementById("input-BuscarOrdenTrabajo");
+//const selectFiltrarBusqueda = document.getElementById("select-FiltrarBusqueda");
 const tablaOrden = document.getElementById("tabla-OrdenTrabajo");
-const urlOrden = "http://localhost:8080/ordenDeTrabajo";
-const urlPersonal = "http://localhost:8080/personalDeTrabajo";
-const urlDetalle = "http://localhost:8080/detalleOrdenTrabajo";
+import { mostrarDetalleOrdenTrabajo } from "./GetDetalle.js";
+export const urlOrden = "http://localhost:8080/ordenDeTrabajo";
+export const urlPersonal = "http://localhost:8080/personalDeTrabajo";
+export const urlDetalle = "http://localhost:8080/detalleOrdenTrabajo";
 //----------------------------------------------------------------------------------------------------------------------
 // llenar tabla con muchas ordenes -------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
@@ -31,6 +32,8 @@ function llenarTablaFor(data){
         const btnVerFactura = document.createElement('button');
         btnVerFactura.textContent = "Factura";
         btnVerFactura.classList= 'btn btn-outline-success';
+        btnVerFactura.setAttribute("data-bs-target", "#modalFactura");
+        btnVerFactura.setAttribute("data-bs-toggle", "modal");
         btnVerFactura.style = "margin: 0px 5px;"
         btnVerFactura.addEventListener("click",async function(){
 
@@ -55,9 +58,11 @@ function llenarTablaFor(data){
         const btnDetalleOrden = document.createElement('button');
         btnDetalleOrden.textContent = "Detalles";
         btnDetalleOrden.classList= 'btn btn-outline-success';
+        btnDetalleOrden.setAttribute("data-bs-target", "#modalDetalleOrden");
+        btnDetalleOrden.setAttribute("data-bs-toggle", "modal");
         btnDetalleOrden.style = "margin: 0px 5px;"
         btnDetalleOrden.addEventListener("click",async function(){
-
+            await mostrarDetalleOrdenTrabajo(OrdenTrabajo.id);
         })
 
         columnaOpciones.appendChild(btnVerFactura);
@@ -80,18 +85,15 @@ function llenarTablaFor(data){
 //----------------------------------------------------------------------------------------------------------------------
 // Buscar --------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
-async function BuscarOrden(){
-    const response = await fetch(urlOrden + "/list");
+function BuscarOrden(){
+    const response =  fetch(urlOrden + "/list");
     if(!response.ok){
         console.log("Error al listar todas las ordenes" + response.status + response.statusText);
     }
-    const dataOrdenTrabajo = await response.json();
+    const dataOrdenTrabajo =  response.json();
     llenarTablaFor(dataOrdenTrabajo);
 }
 
 //----------------------------------------------------------------------------------------------------------------------
 // Boton buscar --------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
-btnBuscarOrden.addEventListener("click", async function(){
-    await BuscarOrden();
-})

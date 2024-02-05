@@ -4,7 +4,6 @@
 const url = 'http://localhost:8080/servicio';
 const urlDetalle = "http://localhost:8080/detalleOrdenTrabajo"; 
 const selectElegirServicio = document.getElementById("select-Servicio");
-const btnAgregarServicios = document.getElementById("");
 const listaServicios = [];
 
 // -------------------------------------------------------------------------------------------------------------------
